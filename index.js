@@ -13,10 +13,14 @@
 const fs = require('fs'),
   path = require('path');
 
-const imageExtensions = require('image-extensions');
+const imageExtensions = require('image-extensions'),
+  sqlite3 = require('sqlite3');
 
 const INDEX_NOT_FOUND = -1,
   EXTENSIONS = imageExtensions.concat(['mp4', 'avi', 'mpg', 'mpeg', 'mts', 'mov']);
+
+// In memory database for storing meta information
+const db = new sqlite3.Database(':memory:');
 
 /**
  * Check if the given file path has a suffix matching the

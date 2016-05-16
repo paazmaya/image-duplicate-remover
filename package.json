@@ -41,7 +41,8 @@
   "license": "MIT",
   "dependencies": {
     "image-extensions": "^1.1.0",
-    "optionator": "^0.8.1"
+    "optionator": "^0.8.1",
+    "sqlite3": "^3.1.4"
   },
   "devDependencies": {
     "codecov": "^1.0.1",
