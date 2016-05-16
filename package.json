@@ -1,0 +1,53 @@
+{
+  "name": "image-duplicate-remover",
+  "version": "0.1.0",
+  "description": "Remove duplicate images from the two given directories recursively",
+  "homepage": "https://github.com/paazmaya/image-duplicate-remover",
+  "main": "index.js",
+  "bin": "bin/image-duplicate-remover.js",
+  "scripts": {
+    "test": "npm run lint && node tests/index_tape.js",
+    "coverage": "istanbul cover tests/index_tape.js --report lcovonly && codecov",
+    "lint": "eslint -c .eslintrc.json index.js bin/image-duplicate-remover.js"
+  },
+  "engines": {
+    "node": ">=4.2.0"
+  },
+  "files": [
+    "bin",
+    "index.js",
+    "package.json",
+    "LICENSE"
+  ],
+  "keywords": [
+    "image",
+    "files",
+    "dublicate",
+    "reduce",
+    "organize"
+  ],
+  "author": {
+    "name": "Juga Paazmaya",
+    "email": "paazmaya@yahoo.com",
+    "url": "http://paazmaya.fi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:paazmaya/image-duplicate-remover.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paazmaya/image-duplicate-remover/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "image-extensions": "^1.1.0",
+    "optionator": "^0.8.1"
+  },
+  "devDependencies": {
+    "codecov": "^1.0.1",
+    "eslint": "^2.10.1",
+    "eslint-config-paazmaya": "^2.1.0",
+    "istanbul": "^0.4.3",
+    "tape": "^4.5.1"
+  }
+}
