@@ -11,7 +11,9 @@
 'use strict';
 
 const fs = require('fs'),
-  path = require('path');
+  path = require('path'),
+  childProcess = require('child_process'),
+  crypto = require('crypto');
 
 const imageExtensions = require('image-extensions'),
   sqlite3 = require('sqlite3');
@@ -69,6 +71,77 @@ const getImages = function _getImages (directory, options) {
   });
 
   return images;
+};
+
+/**
+ * Create SHA-256 hash
+ *
+ * @param  {Buffer} content Image file contents
+ * @return {string}         Hash string in base64
+ */
+const createHash = (content) => {
+  // Hash generator
+  const hash = crypto.createHash('sha256');
+
+  hash.update(content, 'binary');
+
+  return hash.digest('base64');
+};
+
+/**
+ * Get information about the image file
+ *
+ * @see http://www.graphicsmagick.org/GraphicsMagick.html#details-format
+ * @param  {string} filepath Image file path
+ * @return {object}          Meta information object
+ */
+const identifyImage = (filepath) => {
+  const options = {
+    cwd: path.dirname(filepath),
+    encoding: 'utf8'
+  };
+  /*
+     %b   file size
+     %h   height
+     %w   width
+     %k   number of unique colors
+     %q   image bit depth
+     %Q   compression quality
+
+     gm identify -format "%b %h %w %k %q %Q" ~/Dropbox/jukka-paasonen-ms2014-10_crop640_.jpg
+     87.5Ki 640 640 80265 8 93
+  */
+  const command = `gm identify -format "%b %h %w %k %q %Q" ${filepath}`;
+
+  const stdout = childProcess.execSync(command, options);
+
+  const raws = stdout.split(' '),
+    values = {},
+    keys = [
+      'filesize',
+      'height',
+      'width',
+      'uniquecolors',
+      'bitdepth',
+      'compression'
+    ];
+  keys.forEach((item, index) => {
+    values[item] = raws[index];
+  });
+
+  return values;
+};
+
+/**
+ * Read meta informations from file and save to database
+ *
+ * @param  {string} filepath Image file path
+ * @return {[type]}          [description]
+ */
+const readImage = (filepath) => {
+  const meta = identifyImage(filepath);
+  const content = fs.readFileSync(filepath);
+  const sha256 = createHash(content);
 };
 
 /**
