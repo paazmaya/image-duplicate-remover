@@ -10,6 +10,8 @@ This tool compares...
 
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
 
+Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files, as sometimes the amount of files to compare is huge.
+
 ## Installation
 
 Make sure to have [GraphicsMagick](http://www.graphicsmagick.org/) available in the `PATH`.
@@ -24,6 +26,7 @@ Now install the command line tool globally, which might need increased privilege
 ```sh
 [sudo] npm install --global image-duplicate-remover
 ```
+
 
 ## Command line options
 

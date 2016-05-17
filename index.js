@@ -24,6 +24,24 @@ const INDEX_NOT_FOUND = -1,
 // In memory database for storing meta information
 const db = new sqlite3.Database(':memory:');
 
+// Create tables needed
+db.serialize(function () {
+  // https://www.sqlite.org/lang_createtable.html
+  // https://www.sqlite.org/withoutrowid.html
+  db.run(`
+    CREATE TABLE files (
+      filepath TEXT PRIMARY KEY,
+      sha256 TEXT,
+      bitdepth REAL,
+      compression REAL,
+      filesize TEXT,
+      height REAL,
+      uniquecolors REAL,
+      width REAL
+    ) WITHOUT ROWID
+  `);
+});
+
 /**
  * Check if the given file path has a suffix matching the
  * available media file suffixes.
@@ -85,46 +103,55 @@ const createHash = (content) => {
 
   hash.update(content, 'binary');
 
-  return hash.digest('base64');
+  return hash.digest('hex');
 };
 
 /**
- * Get information about the image file
+ * Get information about the image file. Format modifiers used:
+ *   %b   file size
+ *   %h   height
+ *   %k   number of unique colors
+ *   %Q   compression quality
+ *   %q   image bit depth
+ *   %w   width
  *
  * @see http://www.graphicsmagick.org/GraphicsMagick.html#details-format
  * @param  {string} filepath Image file path
- * @return {object}          Meta information object
+ * @return {object|bool}     Meta information object or false when failed
  */
 const identifyImage = (filepath) => {
   const options = {
     cwd: path.dirname(filepath),
     encoding: 'utf8'
   };
-  /*
-     %b   file size
-     %h   height
-     %w   width
-     %k   number of unique colors
-     %q   image bit depth
-     %Q   compression quality
+  const command = `gm identify -format "%q %Q %b %h %k %w" ${filepath}`;
 
-     gm identify -format "%b %h %w %k %q %Q" ~/Dropbox/jukka-paasonen-ms2014-10_crop640_.jpg
-     87.5Ki 640 640 80265 8 93
-  */
-  const command = `gm identify -format "%b %h %w %k %q %Q" ${filepath}`;
+  let stdout = '';
+  try {
+    stdout = childProcess.execSync(command, options);
+  }
+  catch (error) {
+    console.error(error.cmd);
+    return false;
+  }
 
-  const stdout = childProcess.execSync(command, options);
+  // When file size did not appear in the middle, assume failure
+  if (stdout.search(/\s\d+\.\d+Ki\s/) === INDEX_NOT_FOUND) {
+    return false;
+  }
 
-  const raws = stdout.split(' '),
+  // Trim removes the new line
+  const raws = stdout.trim().split(' '),
     values = {},
     keys = [
+      'bitdepth',
+      'compression',
       'filesize',
       'height',
-      'width',
       'uniquecolors',
-      'bitdepth',
-      'compression'
+      'width'
     ];
+
   keys.forEach((item, index) => {
     values[item] = raws[index];
   });
@@ -142,6 +169,23 @@ const readImage = (filepath) => {
   const meta = identifyImage(filepath);
   const content = fs.readFileSync(filepath);
   const sha256 = createHash(content);
+
+
+  db.serialize(function () {
+    const stmt = db.prepare(`INSERT INTO files VALUES (${Array(8).fill('?').join(', ')})`);
+    stmt.run(
+      filepath,
+      sha256,
+      meta.bitdepth,
+      meta.compression,
+      meta.filesize,
+      meta.height,
+      meta.uniquecolors,
+      meta.width
+    );
+    stmt.finalize();
+  });
+
 };
 
 /**
@@ -157,7 +201,7 @@ const readImage = (filepath) => {
  */
 module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
   const primaryImages = getImages(primaryDir, options);
-  const secondaryImages = getImages(secondaryDir, options);
+  let secondaryImages = getImages(secondaryDir, options);
 
   console.log('secondaryImages.length before reduction: ' + secondaryImages.length);
 
@@ -176,6 +220,7 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
   let removedFiles = 0;
 
   primaryImages.forEach((primaryItem) => {
+    readImage(primaryItem);
     secondaryImages.forEach((secondaryItem) => {
 
       if (options.verbose) {
@@ -189,9 +234,17 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
     });
   });
 
+
+  db.each('SELECT * FROM files', function (err, row) {
+    console.log(row);
+  });
+
   console.log(`Removed total of ${removedFiles} duplicate image files`);
 };
 
 // Exposed for testing
 module.exports._isMedia = isMedia;
 module.exports._getImages = getImages;
+module.exports._createHash = createHash;
+module.exports._identifyImage = identifyImage;
+module.exports._readImage = readImage;
