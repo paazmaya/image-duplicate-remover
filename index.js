@@ -19,7 +19,10 @@ const imageExtensions = require('image-extensions'),
   sqlite3 = require('sqlite3');
 
 const INDEX_NOT_FOUND = -1,
-  EXTENSIONS = imageExtensions.concat(['mp4', 'avi', 'mpg', 'mpeg', 'mts', 'mov']);
+  EXTENSIONS = imageExtensions.concat(['mp4', 'avi', 'mpg', 'mpeg', 'mts', 'mov']),
+  // Find keys and numerical values
+  GM_COMPARE_NUMBERS_EXPR = /^\s+(\w+):\s+([\d\.]+)/gm,
+  GM_IDENTIFY_SIZE = /\s\d+\.\d+Ki\s/;
 
 // In memory database for storing meta information
 let db;
@@ -45,8 +48,7 @@ const createDatabase = (location = ':memory:') => {
         filesize TEXT,
         height REAL,
         uniquecolors REAL,
-        width REAL,
-        color TEXT
+        width REAL
       ) WITHOUT ROWID
     `);
   });
@@ -124,15 +126,15 @@ const createHash = (content) => {
  *   %w   width
  *
  * @see http://www.graphicsmagick.org/GraphicsMagick.html#details-format
- * @param  {string} filepath  Image file path
+ * @param {string} filepath  Image file path
  * @returns {object|bool}     Meta information object or false when failed
  */
 const identifyImage = (filepath) => {
   const options = {
-    cwd: path.dirname(filepath),
-    encoding: 'utf8'
-  };
-  const command = `gm identify -format "%q %Q %b %h %k %w" ${filepath}`;
+      cwd: path.dirname(filepath),
+      encoding: 'utf8'
+    },
+    command = `gm identify -format "%q %Q %b %h %k %w" ${filepath}`;
 
   let stdout = '';
   try {
@@ -144,7 +146,7 @@ const identifyImage = (filepath) => {
   }
 
   // When file size did not appear in the middle, assume failure
-  if (stdout.search(/\s\d+\.\d+Ki\s/) === INDEX_NOT_FOUND) {
+  if (stdout.search(GM_IDENTIFY_SIZE) === INDEX_NOT_FOUND) {
     return false;
   }
 
@@ -175,6 +177,7 @@ const identifyImage = (filepath) => {
  * @param  {Number} y        Position in the image
  * @return {string|bool}     Color value or false when failed
  */
+/*
 const getPixelColor = (filepath, x = 0, y = 0) => {
   const options = {
     cwd: path.dirname(filepath),
@@ -183,34 +186,98 @@ const getPixelColor = (filepath, x = 0, y = 0) => {
   const command = `gm convert ${filepath} -format "'%[pixel:p{${x},${y}}]'" info:-`;
   console.log(command, options);
 };
+*/
 /**
  * Read meta informations from file and save to database
  *
- * @param  {string} filepath Image file path
+ * @param {string} filepath Image file path
  * @returns {void}
  */
 const readImage = (filepath) => {
   const meta = identifyImage(filepath);
-  const color = getPixelColor(filepath);
+  //const color = getPixelColor(filepath);
   const content = fs.readFileSync(filepath);
   const sha256 = createHash(content);
 
+  const values = [
+    filepath,
+    sha256,
+    meta.bitdepth,
+    meta.compression,
+    meta.filesize,
+    meta.height,
+    meta.uniquecolors,
+    meta.width
+  ];
+  const questions = Array(values.length).fill('?').join(', ');
   db.serialize(() => {
-    const statement = db.prepare(`INSERT INTO files VALUES (${Array(9).fill('?').join(', ')})`);
-    statement.run(
-      filepath,
-      sha256,
-      meta.bitdepth,
-      meta.compression,
-      meta.filesize,
-      meta.height,
-      meta.uniquecolors,
-      meta.width,
-      color
-    );
+    const statement = db.prepare(`INSERT INTO files VALUES (${questions})`);
+    statement.run(values);
     statement.finalize();
   });
+};
 
+/**
+ * Compare two images against each other
+ *
+ * @see http://www.graphicsmagick.org/compare.html
+ * @param {string} a Image filepath
+ * @param {string} b Image filepath
+ * @returns {object|bool} Comparison numbers or false when failed
+ */
+const compareImages = (a, b) => {
+  const options = {
+      cwd: path.dirname(a),
+      encoding: 'utf8'
+    },
+    metric = 'mse', // mae, mse, pae, psnr, rmse
+    command = `gm compare -metric ${metric} ${a} ${b}`;
+
+  let stdout = '';
+  try {
+    stdout = childProcess.execSync(command, options);
+  }
+  catch (error) {
+    console.error(error.cmd);
+    return false;
+  }
+
+
+  const norm = {};
+  let normalised;
+
+  while ((normalised = GM_COMPARE_NUMBERS_EXPR.exec(stdout)) !== null) {
+    norm[normalised[1].toLowerCase()] = parseFloat(normalised[2], 10);
+  }
+
+  if (Object.keys(norm).length !== 4) {
+    return false;
+  }
+
+  return norm;
+};
+
+/**
+ * Remove the given file
+ *
+ * @param {string} primaryItem      Image filepath that is used only for verbose information
+ * @param {string} secondaryItem    Image filepath that would be removed when not options.dryRun
+ * @param {object} options          Set of options that are all boolean
+ * @param {boolean} options.verbose Print out current process
+ * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
+ * @returns {Number} Count of reoved files, being zero or one
+ */
+const removeSecondaryFile = (primaryItem, secondaryItem, options) => {
+  if (options.verbose) {
+    console.log(`Removing ${secondaryItem} since it is the same as ${primaryItem}`);
+  }
+
+  if (!options.dryRun) {
+    // fs.unlinkSync(secondaryItem);
+    return 1;
+  }
+
+  return 0;
 };
 
 /**
@@ -229,14 +296,10 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
   const primaryImages = getImages(primaryDir, options);
   let secondaryImages = getImages(secondaryDir, options);
 
-  console.log('secondaryImages.length before reduction: ' + secondaryImages.length);
-
-  // Remove possible duplicate file paths
+  // Remove possible duplicate file paths, just in case
   secondaryImages = secondaryImages.filter((item) => {
     return primaryImages.indexOf(item) === INDEX_NOT_FOUND;
   });
-
-  console.log('secondaryImages.length after reduction: ' + secondaryImages.length);
 
   if (options.verbose) {
     console.log(`Found total of ${primaryImages.length} to compare with image ${secondaryImages.length}`);
@@ -249,17 +312,16 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
     readImage(primaryItem);
     secondaryImages.forEach((secondaryItem) => {
 
-      if (options.verbose) {
-        console.log(`Removing ${secondaryItem} since it is the same as ${primaryItem}`);
-      }
+      const comparison = compareImages(primaryItem, secondaryItem);
+      console.log(comparison);
 
-      if (!options.dryRun) {
-        fs.renameSync(secondaryItem);
-        ++removedFiles;
+      if (comparison.total === 0) {
+        removedFiles += removeSecondaryFile(primaryItem, secondaryItem, options);
       }
     });
   });
 
+  console.log(`Removed total of ${removedFiles} files`);
 
   db.each('SELECT * FROM files', (error, row) => {
     if (error) {
@@ -278,5 +340,8 @@ module.exports._isMedia = isMedia;
 module.exports._getImages = getImages;
 module.exports._createHash = createHash;
 module.exports._identifyImage = identifyImage;
-module.exports._getPixelColor = getPixelColor;
+//module.exports._getPixelColor = getPixelColor;
+module.exports._compareImages = compareImages;
 module.exports._readImage = readImage;
+module.exports._removeSecondaryFile = removeSecondaryFile;
+

@@ -38,10 +38,10 @@ tape('private methods exposed for testing', (test) => {
 tape('generate SHA-256 hash', (test) => {
   test.plan(1);
 
-  const filepath = 'tests/fixtures/jukka-paasonen.jpg';
+  const filepath = 'tests/fixtures/a/jukka-paasonen.jpg';
   const hash = duplicateRemover._createHash(filepath);
 
-  test.equal(hash, 'b4ab04800ab17ddc3d0d796c818cc20783b7719c5b6a683915d41b35f3e7c4cf');
+  test.equal(hash, '8bc08e6a205ca03124ce2ab971157e13475607a2058424c4389400bc4fc14659');
 });
 
 tape('generate SHA-256 hash from JS file', (test) => {
@@ -56,7 +56,7 @@ tape('generate SHA-256 hash from JS file', (test) => {
 tape('identify jpeg image', (test) => {
   test.plan(1);
 
-  const filepath = path.join(__dirname, 'fixtures', 'jukka-paasonen.jpg');
+  const filepath = path.join(__dirname, 'fixtures', 'a', 'jukka-paasonen.jpg');
   const meta = duplicateRemover._identifyImage(filepath);
 
   test.deepEqual(meta, {
@@ -87,3 +87,33 @@ tape('identify fails on non existing file', (test) => {
   test.deepEqual(meta, false);
 });
 
+
+tape('compare identical images with different exif', (test) => {
+  test.plan(1);
+
+  const a = path.join(__dirname, 'fixtures', 'a', 'jukka-paasonen.jpg');
+  const b = path.join(__dirname, 'fixtures', 'b', 'jukka-paasonen.jpg');
+  const data = duplicateRemover._compareImages(a, b);
+
+  test.deepEqual(data, {
+    blue: 0,
+    green: 0,
+    red: 0,
+    total: 0
+  });
+});
+
+tape('compare different images', (test) => {
+  test.plan(1);
+
+  const a = path.join(__dirname, 'fixtures', 'a', 'black-white-red.png');
+  const b = path.join(__dirname, 'fixtures', 'b', 'black-white-violet.png');
+  const data = duplicateRemover._compareImages(a, b);
+
+  test.deepEqual(data, {
+    blue: 0.2903703704,
+    green: 0.0866333461,
+    red: 0.0014814815,
+    total: 0.1261617327
+  });
+});
