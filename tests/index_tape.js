@@ -24,8 +24,9 @@ tape('a function is exported', (test) => {
 });
 
 tape('private methods exposed for testing', (test) => {
-  test.plan(5);
+  test.plan(6);
 
+  test.equal(typeof duplicateRemover._createDatabase, 'function');
   test.equal(typeof duplicateRemover._isMedia, 'function');
   test.equal(typeof duplicateRemover._getImages, 'function');
   test.equal(typeof duplicateRemover._createHash, 'function');

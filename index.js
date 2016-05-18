@@ -22,32 +22,41 @@ const INDEX_NOT_FOUND = -1,
   EXTENSIONS = imageExtensions.concat(['mp4', 'avi', 'mpg', 'mpeg', 'mts', 'mov']);
 
 // In memory database for storing meta information
-const db = new sqlite3.Database(':memory:');
+let db;
 
-// Create tables needed
-db.serialize(function () {
-  // https://www.sqlite.org/lang_createtable.html
-  // https://www.sqlite.org/withoutrowid.html
-  db.run(`
-    CREATE TABLE files (
-      filepath TEXT PRIMARY KEY,
-      sha256 TEXT,
-      bitdepth REAL,
-      compression REAL,
-      filesize TEXT,
-      height REAL,
-      uniquecolors REAL,
-      width REAL
-    ) WITHOUT ROWID
-  `);
-});
+/**
+ * Create and initialise SQLite database and tables
+ * @param  {string} location Where shall the database be stored
+ * @returns {void}
+ */
+const createDatabase = (location = ':memory:') => {
+  db = new sqlite3.Database(location);
+
+  // Create tables needed
+  db.serialize(() => {
+    // https://www.sqlite.org/lang_createtable.html
+    // https://www.sqlite.org/withoutrowid.html
+    db.run(`
+      CREATE TABLE files (
+        filepath TEXT PRIMARY KEY,
+        sha256 TEXT,
+        bitdepth REAL,
+        compression REAL,
+        filesize TEXT,
+        height REAL,
+        uniquecolors REAL,
+        width REAL,
+        color TEXT
+      ) WITHOUT ROWID
+    `);
+  });
+};
 
 /**
  * Check if the given file path has a suffix matching the
  * available media file suffixes.
  *
  * @param {string} filepath  Absolute file path
- *
  * @returns {bool} True in case the filepath is a media file according to the suffix
  */
 const isMedia = function _isMedia (filepath) {
@@ -63,7 +72,6 @@ const isMedia = function _isMedia (filepath) {
  * @param {object} options          Set of options that are all boolean
  * @param {boolean} options.verbose Print out current process
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
- *
  * @returns {array} List of image with full path
  */
 const getImages = function _getImages (directory, options) {
@@ -95,7 +103,7 @@ const getImages = function _getImages (directory, options) {
  * Create SHA-256 hash
  *
  * @param  {Buffer} content Image file contents
- * @return {string}         Hash string in base64
+ * @returns {string}        Hash string in base64
  */
 const createHash = (content) => {
   // Hash generator
@@ -116,8 +124,8 @@ const createHash = (content) => {
  *   %w   width
  *
  * @see http://www.graphicsmagick.org/GraphicsMagick.html#details-format
- * @param  {string} filepath Image file path
- * @return {object|bool}     Meta information object or false when failed
+ * @param  {string} filepath  Image file path
+ * @returns {object|bool}     Meta information object or false when failed
  */
 const identifyImage = (filepath) => {
   const options = {
@@ -160,20 +168,36 @@ const identifyImage = (filepath) => {
 };
 
 /**
+ * Get the pixel color for the given position in the image
+ *
+ * @param  {string} filepath Image file path
+ * @param  {Number} x        Position in the image
+ * @param  {Number} y        Position in the image
+ * @return {string|bool}     Color value or false when failed
+ */
+const getPixelColor = (filepath, x = 0, y = 0) => {
+  const options = {
+    cwd: path.dirname(filepath),
+    encoding: 'utf8'
+  };
+  const command = `gm convert ${filepath} -format "'%[pixel:p{${x},${y}}]'" info:-`;
+  console.log(command, options);
+};
+/**
  * Read meta informations from file and save to database
  *
  * @param  {string} filepath Image file path
- * @return {[type]}          [description]
+ * @returns {void}
  */
 const readImage = (filepath) => {
   const meta = identifyImage(filepath);
+  const color = getPixelColor(filepath);
   const content = fs.readFileSync(filepath);
   const sha256 = createHash(content);
 
-
-  db.serialize(function () {
-    const stmt = db.prepare(`INSERT INTO files VALUES (${Array(8).fill('?').join(', ')})`);
-    stmt.run(
+  db.serialize(() => {
+    const statement = db.prepare(`INSERT INTO files VALUES (${Array(9).fill('?').join(', ')})`);
+    statement.run(
       filepath,
       sha256,
       meta.bitdepth,
@@ -181,9 +205,10 @@ const readImage = (filepath) => {
       meta.filesize,
       meta.height,
       meta.uniquecolors,
-      meta.width
+      meta.width,
+      color
     );
-    stmt.finalize();
+    statement.finalize();
   });
 
 };
@@ -196,10 +221,11 @@ const readImage = (filepath) => {
  * @param {object} options          Set of options that are all boolean
  * @param {boolean} options.verbose Print out current process
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
- *
  * @returns {void}
  */
 module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
+  createDatabase();
+
   const primaryImages = getImages(primaryDir, options);
   let secondaryImages = getImages(secondaryDir, options);
 
@@ -235,7 +261,11 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
   });
 
 
-  db.each('SELECT * FROM files', function (err, row) {
+  db.each('SELECT * FROM files', (error, row) => {
+    if (error) {
+      console.error('Database query failed');
+      console.error(error);
+    }
     console.log(row);
   });
 
@@ -243,8 +273,10 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
 };
 
 // Exposed for testing
+module.exports._createDatabase = createDatabase;
 module.exports._isMedia = isMedia;
 module.exports._getImages = getImages;
 module.exports._createHash = createHash;
 module.exports._identifyImage = identifyImage;
+module.exports._getPixelColor = getPixelColor;
 module.exports._readImage = readImage;
