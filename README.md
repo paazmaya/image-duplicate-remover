@@ -6,7 +6,14 @@
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
 
 Too many images that are the same but might have different dates and other metadata.
-This tool compares...
+This tool compares images based on the following criteria:
+
+* SHA-256 hash of the file
+* Width and height
+* Compression
+* Bit depth
+* File size
+* Number of unique colors
 
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
 
