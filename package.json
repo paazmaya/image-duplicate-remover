@@ -29,7 +29,7 @@
   "author": {
     "name": "Juga Paazmaya",
     "email": "paazmaya@yahoo.com",
-    "url": "http://paazmaya.fi"
+    "url": "https://paazmaya.fi"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "codecov": "^1.0.1",
-    "eslint": "^3.0.0",
+    "eslint": "^3.0.1",
     "eslint-config-paazmaya": "^2.2.0",
     "istanbul": "^0.4.4",
     "tape": "^4.6.0"

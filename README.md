@@ -86,5 +86,5 @@ npm test
 
 Licensed under [the MIT license](LICENSE).
 
-Copyright (c) [Juga Paazmaya](http://paazmaya.fi) <paazmaya@yahoo.com>
+Copyright (c) [Juga Paazmaya](https://paazmaya.fi) <paazmaya@yahoo.com>
 
