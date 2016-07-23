@@ -3,17 +3,18 @@
 > Remove duplicate images from the two given directories recursively
 
 [![Build Status](https://travis-ci.org/paazmaya/image-duplicate-remover.svg?branch=master)](https://travis-ci.org/paazmaya/image-duplicate-remover)
+[![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/master?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/master)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
 
 Too many images that are the same but might have different dates and other metadata.
 This tool compares images based on the following criteria:
 
-* SHA-256 hash of the file
-* Width and height
-* Compression
-* Bit depth
-* File size
-* Number of unique colors
+* [x] SHA-256 hash of the file, since `v0.1.0`
+* [ ] Width and height
+* [ ] Compression
+* [ ] Bit depth
+* [ ] File size
+* [ ] Number of unique colors
 
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
 
@@ -79,7 +80,7 @@ npm test
 
 ## Version history
 
-* `v0.1.0` (2016-05-)
+* `v0.1.0` (2016-08-)
     - Gets the job simply done, hence first release
 
 ## License
