@@ -35,7 +35,6 @@ Now install the command line tool globally, which might need increased privilege
 [sudo] npm install --global image-duplicate-remover
 ```
 
-
 ## Command line options
 
 ```sh
@@ -45,10 +44,10 @@ image-duplicate-remover --help
 ```sh
 image-duplicate-remover [options] <primary directory> <secondary directory>
 
-  -h, --help                 Help and usage instructions
-  -V, --version              Version number
-  -v, --verbose              Verbose output, will print which file is currently being processed
-  -n, --dry-run              Try it out without actually removing anything
+  -h, --help            Help and usage instructions
+  -V, --version         Version number
+  -v, --verbose         Verbose output, will print which file is currently being processed
+  -n, --dry-run         Try it out without actually removing anything
 
 Version 0.1.0
 ```

@@ -18,10 +18,12 @@ const fs = require('fs'),
 const imageExtensions = require('image-extensions'),
   sqlite3 = require('sqlite3');
 
+const compareImages = require('./lib/compare-images'),
+  identifyImage = require('./lib/identify-image'),
+  isMedia = require('./lib/is-media');
+
 const INDEX_NOT_FOUND = -1,
-  EXTENSIONS = imageExtensions.concat(['mp4', 'avi', 'mpg', 'mpeg', 'mts', 'mov']),
   // Find keys and numerical values
-  GM_COMPARE_NUMBERS_EXPR = /^\s+(\w+):\s+([\d\.]+)/gm,
   GM_IDENTIFY_SIZE = /\s\d+\.\d+Ki\s/;
 
 // In memory database for storing meta information
@@ -54,18 +56,6 @@ const createDatabase = (location = ':memory:') => {
   });
 };
 
-/**
- * Check if the given file path has a suffix matching the
- * available media file suffixes.
- *
- * @param {string} filepath  Absolute file path
- * @returns {bool} True in case the filepath is a media file according to the suffix
- */
-const isMedia = function _isMedia (filepath) {
-  const ext = path.extname(filepath).slice(1).toLowerCase();
-
-  return EXTENSIONS.indexOf(ext) !== INDEX_NOT_FOUND;
-};
 
 /**
  * Read a directory, by returning all files with full filepath
@@ -117,59 +107,6 @@ const createHash = (content) => {
 };
 
 /**
- * Get information about the image file. Format modifiers used:
- *   %b   file size
- *   %h   height
- *   %k   number of unique colors
- *   %Q   compression quality
- *   %q   image bit depth
- *   %w   width
- *
- * @see http://www.graphicsmagick.org/GraphicsMagick.html#details-format
- * @param {string} filepath  Image file path
- * @returns {object|bool}     Meta information object or false when failed
- */
-const identifyImage = (filepath) => {
-  const options = {
-      cwd: path.dirname(filepath),
-      encoding: 'utf8'
-    },
-    command = `gm identify -format "%q %Q %b %h %k %w" ${filepath}`;
-
-  let stdout = '';
-  try {
-    stdout = childProcess.execSync(command, options);
-  }
-  catch (error) {
-    console.error(error.cmd);
-    return false;
-  }
-
-  // When file size did not appear in the middle, assume failure
-  if (stdout.search(GM_IDENTIFY_SIZE) === INDEX_NOT_FOUND) {
-    return false;
-  }
-
-  // Trim removes the new line
-  const raws = stdout.trim().split(' '),
-    values = {},
-    keys = [
-      'bitdepth',
-      'compression',
-      'filesize',
-      'height',
-      'uniquecolors',
-      'width'
-    ];
-
-  keys.forEach((item, index) => {
-    values[item] = raws[index];
-  });
-
-  return values;
-};
-
-/**
  * Get the pixel color for the given position in the image
  *
  * @param  {string} filepath Image file path
@@ -217,45 +154,6 @@ const readImage = (filepath) => {
   });
 };
 
-/**
- * Compare two images against each other
- *
- * @see http://www.graphicsmagick.org/compare.html
- * @param {string} a Image filepath
- * @param {string} b Image filepath
- * @returns {object|bool} Comparison numbers or false when failed
- */
-const compareImages = (a, b) => {
-  const options = {
-      cwd: path.dirname(a),
-      encoding: 'utf8'
-    },
-    metric = 'mse', // mae, mse, pae, psnr, rmse
-    command = `gm compare -metric ${metric} ${a} ${b}`;
-
-  let stdout = '';
-  try {
-    stdout = childProcess.execSync(command, options);
-  }
-  catch (error) {
-    console.error(error.cmd);
-    return false;
-  }
-
-
-  const norm = {};
-  let normalised;
-
-  while ((normalised = GM_COMPARE_NUMBERS_EXPR.exec(stdout)) !== null) {
-    norm[normalised[1].toLowerCase()] = parseFloat(normalised[2], 10);
-  }
-
-  if (Object.keys(norm).length !== 4) {
-    return false;
-  }
-
-  return norm;
-};
 
 /**
  * Remove the given file

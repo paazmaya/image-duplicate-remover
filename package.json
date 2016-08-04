@@ -8,7 +8,7 @@
   "scripts": {
     "test": "npm run lint && node tests/index_tape.js",
     "coverage": "istanbul cover tests/index_tape.js --report lcovonly && codecov",
-    "lint": "eslint -c .eslintrc.json index.js bin/image-duplicate-remover.js"
+    "lint": "eslint -c .eslintrc.json index.js bin lib"
   },
   "engines": {
     "node": ">=4.2.0"
