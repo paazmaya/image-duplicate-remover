@@ -11,20 +11,15 @@
 'use strict';
 
 const fs = require('fs'),
-  path = require('path'),
-  childProcess = require('child_process'),
-  crypto = require('crypto');
+  path = require('path');
 
-const imageExtensions = require('image-extensions'),
-  sqlite3 = require('sqlite3');
+const sqlite3 = require('sqlite3');
 
 const compareImages = require('./lib/compare-images'),
-  identifyImage = require('./lib/identify-image'),
-  isMedia = require('./lib/is-media');
+  isMedia = require('./lib/is-media'),
+  readImage = require('./lib/read-image');
 
-const INDEX_NOT_FOUND = -1,
-  // Find keys and numerical values
-  GM_IDENTIFY_SIZE = /\s\d+\.\d+Ki\s/;
+const INDEX_NOT_FOUND = -1;
 
 // In memory database for storing meta information
 let db;
@@ -34,7 +29,8 @@ let db;
  * @param  {string} location Where shall the database be stored
  * @returns {void}
  */
-const createDatabase = (location = ':memory:') => {
+const createDatabase = (location) => {
+  location = location || ':memory:';
   db = new sqlite3.Database(location);
 
   // Create tables needed
@@ -92,21 +88,6 @@ const getImages = function _getImages (directory, options) {
 };
 
 /**
- * Create SHA-256 hash
- *
- * @param  {Buffer} content Image file contents
- * @returns {string}        Hash string in base64
- */
-const createHash = (content) => {
-  // Hash generator
-  const hash = crypto.createHash('sha256');
-
-  hash.update(content, 'binary');
-
-  return hash.digest('hex');
-};
-
-/**
  * Get the pixel color for the given position in the image
  *
  * @param  {string} filepath Image file path
@@ -124,35 +105,6 @@ const getPixelColor = (filepath, x = 0, y = 0) => {
   console.log(command, options);
 };
 */
-/**
- * Read meta informations from file and save to database
- *
- * @param {string} filepath Image file path
- * @returns {void}
- */
-const readImage = (filepath) => {
-  const meta = identifyImage(filepath);
-  //const color = getPixelColor(filepath);
-  const content = fs.readFileSync(filepath);
-  const sha256 = createHash(content);
-
-  const values = [
-    filepath,
-    sha256,
-    meta.bitdepth,
-    meta.compression,
-    meta.filesize,
-    meta.height,
-    meta.uniquecolors,
-    meta.width
-  ];
-  const questions = Array(values.length).fill('?').join(', ');
-  db.serialize(() => {
-    const statement = db.prepare(`INSERT INTO files VALUES (${questions})`);
-    statement.run(values);
-    statement.finalize();
-  });
-};
 
 
 /**
@@ -163,7 +115,7 @@ const readImage = (filepath) => {
  * @param {object} options          Set of options that are all boolean
  * @param {boolean} options.verbose Print out current process
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
- * @returns {Number} Count of reoved files, being zero or one
+ * @returns {Number} Count of removed files, being zero or one
  */
 const removeSecondaryFile = (primaryItem, secondaryItem, options) => {
   if (options.verbose) {
@@ -234,12 +186,7 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
 
 // Exposed for testing
 module.exports._createDatabase = createDatabase;
-module.exports._isMedia = isMedia;
 module.exports._getImages = getImages;
-module.exports._createHash = createHash;
-module.exports._identifyImage = identifyImage;
 //module.exports._getPixelColor = getPixelColor;
-module.exports._compareImages = compareImages;
-module.exports._readImage = readImage;
 module.exports._removeSecondaryFile = removeSecondaryFile;
 

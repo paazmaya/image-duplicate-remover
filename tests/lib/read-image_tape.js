@@ -14,12 +14,4 @@ const fs = require('fs'),
   path = require('path');
 
 const tape = require('tape'),
-  duplicateRemover = require('../index');
-
-tape('a function is exported', (test) => {
-  test.plan(2);
-
-  test.equal(typeof duplicateRemover, 'function');
-  test.equal(duplicateRemover.length, 3, 'has three arguments');
-});
-
+  readImage = require('../../lib/read-image');
