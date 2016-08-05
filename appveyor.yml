@@ -21,11 +21,15 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version
+  - appveyor DownloadFile http://downloads.sourceforge.net/graphicsmagick/GraphicsMagick-1.3.24-Q16-win64-dll.exe
+  - GraphicsMagick-1.3.24-Q16-win64-dll.exe /SP /VERYSILENT /NORESTART /NOICONS /DIR=%CD%\gm
+  - set PATH=%CD%\gm;%PATH%
   - npm install
 
 test_script:
   - node --version
   - npm --version
+  - gm version
   - npm run lint
   - npm test
 

@@ -131,7 +131,7 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
     storeImageData(secondaryImages, db);
   });
 
-  removeFiles(primaryImages, secondaryImages, db, options).then((removedFiles) => {
+  removeFiles(primaryImages, secondaryImages, db, options).then((/*removedFiles*/) => {
 
     saveDatabaseContents(db, 'database-content.json');
 
