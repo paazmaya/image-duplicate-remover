@@ -6,7 +6,7 @@
   "main": "index.js",
   "bin": "bin/image-duplicate-remover.js",
   "scripts": {
-    "test": "npm run lint && tape tests/index_tape.js tests/*/*_tape.js",
+    "test": "tape tests/index_tape.js tests/*/*_tape.js",
     "coverage": "istanbul cover tests/index_tape.js tests/*/*_tape.js --report lcovonly && codecov",
     "lint": "eslint -c .eslintrc.json index.js bin lib"
   },

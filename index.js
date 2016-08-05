@@ -106,7 +106,7 @@ const saveDatabaseContents = (db, filename) => {
  * @param {boolean} options.verbose Print out current process
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
  * @param {string} options.metric   Method to use when comparing two images with GraphicsMagick
- * @returns {Number} Total number of removed files
+ * @returns {void}
  */
 module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
   const db = createDatabase();
@@ -120,7 +120,7 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
   });
 
   if (options.verbose) {
-    console.log(`Found total of ${primaryImages.length} to compare with ${secondaryImages.length}`);
+    console.log(`Found ${primaryImages.length} primary images to compare with ${secondaryImages.length} secondary images`);
   }
 
   db.serialize(() => {
@@ -131,10 +131,11 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
     storeImageData(secondaryImages, db);
   });
 
-  const listRemoved = removeFiles(primaryImages, secondaryImages, db, options);
+  removeFiles(primaryImages, secondaryImages, db, options).then((removedFiles) => {
 
-  saveDatabaseContents(db, 'database-content.json');
+    saveDatabaseContents(db, 'database-content.json');
 
-  db.close();
-  return listRemoved.length;
+    db.close();
+  });
+
 };
