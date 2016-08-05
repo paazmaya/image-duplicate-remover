@@ -10,8 +10,7 @@
 
 'use strict';
 
-const fs = require('fs'),
-  path = require('path');
+const path = require('path');
 
 const tape = require('tape'),
   identifyImage = require('../../lib/identify-image');
@@ -29,6 +28,22 @@ tape('identify jpeg image', (test) => {
     height: '200',
     uniquecolors: '24529',
     width: '200'
+  });
+});
+
+tape('identify png image with spaces in its name', (test) => {
+  test.plan(1);
+
+  const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
+  const meta = identifyImage(filepath);
+
+  test.deepEqual(meta, {
+    bitdepth: '8',
+    compression: '75',
+    filesize: '3.1Ki',
+    height: '662',
+    uniquecolors: '2',
+    width: '1236'
   });
 });
 

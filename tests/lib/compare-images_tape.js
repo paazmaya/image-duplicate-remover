@@ -10,8 +10,7 @@
 
 'use strict';
 
-const fs = require('fs'),
-  path = require('path');
+const path = require('path');
 
 const tape = require('tape'),
   compareImages = require('../../lib/compare-images');
@@ -43,5 +42,20 @@ tape('compare different images', (test) => {
     green: 0.0866333461,
     red: 0.0014814815,
     total: 0.1261617327
+  });
+});
+
+tape('compare identical images with different optimisation', (test) => {
+  test.plan(1);
+
+  const a = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
+  const b = path.join(__dirname, '..', 'fixtures', 'b', 'You Dont Know npm.png');
+  const data = compareImages(a, b);
+
+  test.deepEqual(data, {
+    blue: 0,
+    green: 0,
+    red: 0,
+    total: 0
   });
 });

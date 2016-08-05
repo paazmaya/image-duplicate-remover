@@ -10,30 +10,33 @@
 
 'use strict';
 
-const fs = require('fs'),
-  path = require('path');
+const fs = require('fs');
 
 const sqlite3 = require('sqlite3');
 
-const compareImages = require('./lib/compare-images'),
-  isMedia = require('./lib/is-media'),
-  readImage = require('./lib/read-image');
+const getImageFiles = require('./lib/get-image-files'),
+  removeFiles = require('./lib/remove-files'),
+  storeImageData = require('./lib/store-image-data');
 
 const INDEX_NOT_FOUND = -1;
 
-// In memory database for storing meta information
-let db;
-
 /**
- * Create and initialise SQLite database and tables
+ * Create and initialise SQLite database and tables, which by default is in memory.
+ *
  * @param  {string} location Where shall the database be stored
- * @returns {void}
+ * @returns {sqlite3.Database} Database instanse
  */
 const createDatabase = (location) => {
   location = location || ':memory:';
-  db = new sqlite3.Database(location);
+  const db = new sqlite3.Database(location, (error) => {
+    if (error) {
+      console.error('Database opening/creation failed');
+      console.error(error);
+    }
+    console.log('Database opened after it was possibly created');
+  });
 
-  // Create tables needed
+  // Create tables needed. Alphaletically ordered keys after primary key and sha256
   db.serialize(() => {
     // https://www.sqlite.org/lang_createtable.html
     // https://www.sqlite.org/withoutrowid.html
@@ -50,41 +53,8 @@ const createDatabase = (location) => {
       ) WITHOUT ROWID
     `);
   });
-};
 
-
-/**
- * Read a directory, by returning all files with full filepath
- *
- * @param {string} directory        Directory to read
- * @param {object} options          Set of options that are all boolean
- * @param {boolean} options.verbose Print out current process
- * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
- * @returns {array} List of image with full path
- */
-const getImages = function _getImages (directory, options) {
-  if (options.verbose) {
-    console.log(`Reading directory ${directory}`);
-  }
-  let images = [];
-
-  const items = fs.readdirSync(directory)
-    .map((item) =>
-      path.join(directory, item)
-    );
-
-  items.forEach((item) => {
-    const stat = fs.statSync(item);
-
-    if (stat.isFile() && isMedia(item)) {
-      images.push(item);
-    }
-    else if (stat.isDirectory()) {
-      images = images.concat(_getImages(item, options));
-    }
-  });
-
-  return images;
+  return db;
 };
 
 /**
@@ -106,28 +76,25 @@ const getPixelColor = (filepath, x = 0, y = 0) => {
 };
 */
 
+const saveDatabaseContents = (db, filename) => {
+  db.serialize(() => {
+    const query = 'SELECT * FROM files';
+    const data = {
+      files: []
+    };
+    db.all(query, (error, rows) => {
+      if (error) {
+        console.error('Database query failed');
+        console.error(error);
+      }
+      else {
+        data.files = rows;
+        const json = JSON.stringify(data, null, ' ');
 
-/**
- * Remove the given file
- *
- * @param {string} primaryItem      Image filepath that is used only for verbose information
- * @param {string} secondaryItem    Image filepath that would be removed when not options.dryRun
- * @param {object} options          Set of options that are all boolean
- * @param {boolean} options.verbose Print out current process
- * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
- * @returns {Number} Count of removed files, being zero or one
- */
-const removeSecondaryFile = (primaryItem, secondaryItem, options) => {
-  if (options.verbose) {
-    console.log(`Removing ${secondaryItem} since it is the same as ${primaryItem}`);
-  }
-
-  if (!options.dryRun) {
-    // fs.unlinkSync(secondaryItem);
-    return 1;
-  }
-
-  return 0;
+        fs.writeFileSync(filename, json, 'utf8');
+      }
+    });
+  });
 };
 
 /**
@@ -138,13 +105,14 @@ const removeSecondaryFile = (primaryItem, secondaryItem, options) => {
  * @param {object} options          Set of options that are all boolean
  * @param {boolean} options.verbose Print out current process
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
- * @returns {void}
+ * @param {string} options.metric   Method to use when comparing two images with GraphicsMagick
+ * @returns {Number} Total number of removed files
  */
 module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
-  createDatabase();
+  const db = createDatabase();
 
-  const primaryImages = getImages(primaryDir, options);
-  let secondaryImages = getImages(secondaryDir, options);
+  const primaryImages = getImageFiles(primaryDir, options);
+  let secondaryImages = getImageFiles(secondaryDir, options);
 
   // Remove possible duplicate file paths, just in case
   secondaryImages = secondaryImages.filter((item) => {
@@ -152,41 +120,21 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
   });
 
   if (options.verbose) {
-    console.log(`Found total of ${primaryImages.length} to compare with image ${secondaryImages.length}`);
+    console.log(`Found total of ${primaryImages.length} to compare with ${secondaryImages.length}`);
   }
 
-  // Counter for files that were removed
-  let removedFiles = 0;
-
-  primaryImages.forEach((primaryItem) => {
-    readImage(primaryItem);
-    secondaryImages.forEach((secondaryItem) => {
-
-      const comparison = compareImages(primaryItem, secondaryItem);
-      console.log(comparison);
-
-      if (comparison.total === 0) {
-        removedFiles += removeSecondaryFile(primaryItem, secondaryItem, options);
-      }
-    });
+  db.serialize(() => {
+    storeImageData(primaryImages, db);
   });
 
-  console.log(`Removed total of ${removedFiles} files`);
-
-  db.each('SELECT * FROM files', (error, row) => {
-    if (error) {
-      console.error('Database query failed');
-      console.error(error);
-    }
-    console.log(row);
+  db.serialize(() => {
+    storeImageData(secondaryImages, db);
   });
 
-  console.log(`Removed total of ${removedFiles} duplicate image files`);
+  const listRemoved = removeFiles(primaryImages, secondaryImages, db, options);
+
+  saveDatabaseContents(db, 'database-content.json');
+
+  db.close();
+  return listRemoved.length;
 };
-
-// Exposed for testing
-module.exports._createDatabase = createDatabase;
-module.exports._getImages = getImages;
-//module.exports._getPixelColor = getPixelColor;
-module.exports._removeSecondaryFile = removeSecondaryFile;
-
