@@ -5,6 +5,7 @@ node_js:
   - "6"
 before_script:
   - sudo apt-get install -y graphicsmagick
+  - gm version
 after_success: "npm run coverage"
 cache:
   directories:
