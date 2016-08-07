@@ -67,4 +67,21 @@ tape('cli should fail when secondary directory do not exist', function (test) {
 
 });
 
+tape('cli should not remove anything when dry run used and duplicates are found', function (test) {
+  test.plan(4);
+
+  const dirA = path.join(__dirname, 'fixtures', 'a');
+  const dirB = path.join(__dirname, 'fixtures', 'b');
+  const initLengthB = fs.readdirSync(dirB);
+
+  execFile('node', [pkg.bin, '-n', dirA, dirB], null, function (error, stdout, stderr) {
+    const afterLengthB = fs.readdirSync(dirB);
+    test.equals(afterLengthB.length, initLengthB.length, 'All files kept intact');
+    test.ok(stdout.indexOf('removableFiles:') !== -1);
+    test.ok(stdout.indexOf('black-white-red.png') !== -1);
+    test.ok(stdout.indexOf('black-white-violet.png') !== -1);
+  });
+
+});
+
 

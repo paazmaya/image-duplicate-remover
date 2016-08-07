@@ -14,6 +14,7 @@ const fs = require('fs'),
   path = require('path');
 
 const tape = require('tape'),
+  getImageFiles = require('../../lib/get-image-files'),
   removeFiles = require('../../lib/remove-files');
 
 tape('does not remove any files when lists are empty', (test) => {
@@ -24,7 +25,7 @@ tape('does not remove any files when lists are empty', (test) => {
       callback();
     },
     all: function (query, callback) {
-      test.equal(query, 'INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 'Query prepared properly');
+      test.fail('All queried unexpectedly');
       callback(null, []);
     }
   };
@@ -39,30 +40,30 @@ tape('does not remove any files when lists are empty', (test) => {
 
 });
 
-/*
-tape('does not remove any files when lists are empty', (test) => {
-  test.plan(1);
+tape('lists expected duplicates without removing on dry run', (test) => {
+  test.plan(5); // all called 4 times, amount of files
 
+  const options = {
+    dryRun: true,
+    verbose: false
+  };
   const dirA = path.join(__dirname, '..', 'fixtures', 'a');
+  const listA = getImageFiles(dirA, options);
   const dirB = path.join(__dirname, '..', 'fixtures', 'b');
+  const listB = getImageFiles(dirB, options);
 
   const db = {
     serialize: function (callback) {
       callback();
     },
     all: function (query, callback) {
-      test.equal(query, 'INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 'Query prepared properly');
+      test.ok(query.indexOf('SELECT B.filepath FROM files A, files B') === 0, 'Query prepared properly');
       callback(null, []);
     }
   };
-  const options = {
-    dryRun: true,
-    verbose: false
-  };
 
-  removeFiles(dirA, dirB, db, options).then((list) => {
-    test.equal(list.length, 0);
+  removeFiles(listA, listB, db, options).then((list) => {
+    test.equal(list.length, 0); // because database is empty
   });
 
 });
-*/
