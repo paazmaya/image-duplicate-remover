@@ -6,8 +6,8 @@
   "main": "index.js",
   "bin": "bin/image-duplicate-remover.js",
   "scripts": {
-    "test": "tape tests/index_tape.js tests/*/*_tape.js",
-    "coverage": "istanbul cover tests/index_tape.js tests/*/*_tape.js --report lcovonly && codecov",
+    "test": "tape tests/*_tape.js tests/*/*_tape.js",
+    "coverage": "istanbul cover tests/*_tape.js tests/*/*_tape.js --report lcovonly && codecov",
     "lint": "eslint -c .eslintrc.json index.js bin lib"
   },
   "engines": {

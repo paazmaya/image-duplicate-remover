@@ -30,8 +30,8 @@ tape('cli should output version number', function (test) {
 tape('cli help output contains version number', function (test) {
   test.plan(2);
 
-  execFile('node', [pkg.bin, '-Vv'], null, function (error, stdout) {
-    const lines = stdout.split('\n');
+  execFile('node', [pkg.bin, '-h'], null, function (error, stdout) {
+    const lines = stdout.trim().split('\n');
     test.equals(lines[0], pkg.name + ' [options] <primary directory> <secondary directory>');
     test.equals(lines[lines.length - 1], 'Version ' + pkg.version);
   });
@@ -42,25 +42,27 @@ tape('cli should fail when directories not specified', function (test) {
   test.plan(1);
 
   execFile('node', [pkg.bin], null, function (error, stdout, stderr) {
-    test.equals(stderr.trim(), 'Sorry but the previously created images directory should exist', 'Error message');
+    test.equals(stderr.trim(), 'Directories not specified');
   });
 
 });
 
 tape('cli should fail when primary directory do not exist', function (test) {
-  test.plan(1);
+  test.plan(2);
 
   execFile('node', [pkg.bin, 'not-around-here', 'tests/fixtures'], null, function (error, stdout, stderr) {
-    test.equals(stderr.trim(), 'Sorry but the currently created images directory should exist', 'Error message');
+    test.ok(stderr.trim().indexOf('Primary directory (') !== -1);
+    test.ok(stderr.trim().indexOf(') does not exist') !== -1);
   });
 
 });
 
 tape('cli should fail when secondary directory do not exist', function (test) {
-  test.plan(1);
+  test.plan(2);
 
   execFile('node', [pkg.bin, 'tests/fixtures', 'not-around-here'], null, function (error, stdout, stderr) {
-    test.equals(stderr.trim(), 'Sorry but the currently created images directory should exist', 'Error message');
+    test.ok(stderr.trim().indexOf('Secondary directory (') !== -1);
+    test.ok(stderr.trim().indexOf(') does not exist') !== -1);
   });
 
 });
