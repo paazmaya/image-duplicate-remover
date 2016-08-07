@@ -16,7 +16,7 @@ const fs = require('fs'),
 
 const tape = require('tape');
 
-const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 
 tape('cli should output version number', function (test) {
   test.plan(1);
