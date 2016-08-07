@@ -1,10 +1,13 @@
-sudo: true
+sudo: false
 language: node_js
 node_js:
   - "4.2"
   - "6"
+addons:
+  apt:
+    packages:
+    - graphicsmagick
 before_script:
-  - sudo apt-get install -y graphicsmagick
   - gm version
 after_success: "npm run coverage"
 cache:
