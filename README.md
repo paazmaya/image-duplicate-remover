@@ -2,7 +2,7 @@
 
 > Remove duplicate images from the two given directories recursively
 
-[![Build Status](https://travis-ci.org/paazmaya/image-duplicate-remover.svg?branch=master)](https://travis-ci.org/paazmaya/image-duplicate-remover)
+[![Ubuntu build Status](https://travis-ci.org/paazmaya/image-duplicate-remover.svg?branch=master)](https://travis-ci.org/paazmaya/image-duplicate-remover)
 [![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/master?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/master)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
 
@@ -17,7 +17,8 @@ This tool compares images based on the following criteria:
 
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
 
-Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files, as sometimes the amount of files to compare is huge.
+Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files,
+as sometimes the amount of files to compare is huge.
 
 ## Installation
 
@@ -82,6 +83,9 @@ npm install
 npm run lint
 npm test
 ```
+
+Automated testing is done against [Ubuntu Trusty at Travis CI](https://travis-ci.org/paazmaya/image-duplicate-remover/)
+and [Windows at AppVeyor](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover).
 
 ## Version history
 
