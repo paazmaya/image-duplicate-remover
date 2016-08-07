@@ -102,6 +102,8 @@ if (!fs.existsSync(secondaryDir)) {
   process.exit(1);
 }
 
+// TODO: Is GraphicsMagick available?
+
 // Fire away
 duplicateRemover(primaryDir, secondaryDir, {
   verbose: typeof opts.verbose === 'boolean' ? opts.verbose : false,
