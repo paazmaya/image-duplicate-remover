@@ -10,9 +10,9 @@ Too many images that are the same but might have different dates and other metad
 This tool compares images based on the following criteria:
 
 * [x] SHA-256 hash of the file, since `v0.1.0`
+* [ ] File size in bytes
 * [ ] Width and height
 * [ ] Bit depth
-* [ ] File size in bytes
 * [ ] Number of unique colors
 
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
@@ -26,6 +26,12 @@ It can be installed for example in Mac via [Brew](http://brew.sh):
 
 ```sh
 brew install graphicsmagick
+```
+
+In Ubuntu it is usually available via:
+
+```sh
+sudo apt-get install graphicsmagick
 ```
 
 Now install the command line tool globally, which might need increased privileges:
@@ -73,6 +79,7 @@ Execute them by running:
 
 ```sh
 npm install
+npm run lint
 npm test
 ```
 

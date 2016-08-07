@@ -10,7 +10,9 @@ addons:
     - graphicsmagick
 before_script:
   - gm version
-  - gm identify -format "Metadata: %q %Q %b %h %k %w" "tests/fixtures/a/jukka-paasonen.jpg"
+script:
+  - npm run lint
+  - npm test
 after_success: "npm run coverage"
 cache:
   directories:
