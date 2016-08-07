@@ -22,12 +22,10 @@ tape('identify jpeg image', (test) => {
   const meta = identifyImage(filepath);
 
   test.deepEqual(meta, {
-    bitdepth: '8',
-    compression: '75',
-    filesize: '7.3Ki',
-    height: '200',
-    uniquecolors: '24441', // in windows, but in linux 24529
-    width: '200'
+    bitdepth: 8,
+    height: 200,
+    uniquecolors: 24441, // in windows, but in linux 24529
+    width: 200
   });
 });
 
@@ -38,12 +36,10 @@ tape('identify png image with spaces in its name', (test) => {
   const meta = identifyImage(filepath);
 
   test.deepEqual(meta, {
-    bitdepth: '8',
-    compression: '75',
-    filesize: '3.1Ki',
-    height: '662',
-    uniquecolors: '2',
-    width: '1236'
+    bitdepth: 8,
+    height: 662,
+    uniquecolors: 2,
+    width: 1236
   });
 });
 

@@ -44,9 +44,8 @@ const createDatabase = (location) => {
       CREATE TABLE files (
         filepath TEXT PRIMARY KEY,
         sha256 TEXT,
+        filesize REAL,
         bitdepth REAL,
-        compression REAL,
-        filesize TEXT,
         height REAL,
         uniquecolors REAL,
         width REAL

@@ -13,7 +13,7 @@
 const path = require('path');
 
 const tape = require('tape'),
-  storeImageData = require('../../lib/store-image-data'); // (filepath, db)
+  storeImageData = require('../../lib/store-image-data');
 
 tape('inserts data to database when file exists', (test) => {
   test.plan(3);
@@ -22,18 +22,17 @@ tape('inserts data to database when file exists', (test) => {
 
   const db = {
     prepare: function (query) {
-      test.equal(query, 'INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 'Query prepared properly');
+      test.equal(query, 'INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?)', 'Query prepared properly');
       return {
         run: function (values) {
           test.deepEqual(values, [
             filepath,
             '60673c95c25853d7e199d5f0d2632f99657383ad18a56e30ab464a1aa97d21c2',
-            '8',
-            '75',
-            '3.1Ki',
-            '662',
-            '2',
-            '1236'
+            3155,
+            8,
+            662,
+            2,
+            1236
           ]);
         },
         finalize: function () {

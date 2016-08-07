@@ -23,12 +23,11 @@ tape('inserts data to database when file exists', (test) => {
   test.deepEqual(actual, {
     filepath: filepath,
     sha256: '60673c95c25853d7e199d5f0d2632f99657383ad18a56e30ab464a1aa97d21c2',
-    bitdepth: '8',
-    compression: '75',
-    filesize: '3.1Ki',
-    height: '662',
-    uniquecolors: '2',
-    width: '1236'
+    filesize: 3155,
+    bitdepth: 8,
+    height: 662,
+    uniquecolors: 2,
+    width: 1236
   });
 });
 

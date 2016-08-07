@@ -11,9 +11,8 @@ This tool compares images based on the following criteria:
 
 * [x] SHA-256 hash of the file, since `v0.1.0`
 * [ ] Width and height
-* [ ] Compression
 * [ ] Bit depth
-* [ ] File size
+* [ ] File size in bytes
 * [ ] Number of unique colors
 
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
