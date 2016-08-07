@@ -60,11 +60,10 @@ Version 0.1.0
 
 ### Example commands
 
-The following command shows how the renaming would be done in the current directory, but it is
-not done since the `--dry-run` option is used.
+The following command shows how two folders are compared, but nothing will be removed since the `--dry-run` option is used.
 
 ```sh
-image-duplicate-remover -vn .
+image-duplicate-remover -vn a b
 ```
 
 ## Contributing
