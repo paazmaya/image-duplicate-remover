@@ -1,3 +1,5 @@
+tmp
+
 # Logs
 logs
 *.log
@@ -36,5 +38,5 @@ node_modules
 .atom
 .idea
 
-# Debuggin output
+# Debugging output
 database-content.json

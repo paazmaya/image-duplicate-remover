@@ -6,9 +6,9 @@
   "main": "index.js",
   "bin": "bin/image-duplicate-remover.js",
   "scripts": {
-    "test": "tape tests/*_tape.js tests/*/*_tape.js",
-    "coverage": "istanbul cover tests/*_tape.js tests/*/*_tape.js --report lcovonly && codecov",
-    "lint": "eslint -c .eslintrc.json index.js bin lib"
+    "lint": "eslint -c .eslintrc.json index.js bin lib",
+    "test": "nyc tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "engines": {
     "node": ">=4.2.0"
@@ -51,7 +51,7 @@
     "codecov": "^1.0.1",
     "eslint": "^3.2.2",
     "eslint-config-paazmaya": "^2.3.1",
-    "istanbul": "^0.4.4",
+    "nyc": "^7.1.0",
     "tape": "^4.6.0"
   }
 }

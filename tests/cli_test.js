@@ -27,6 +27,15 @@ tape('cli should output version number', function (test) {
 
 });
 
+tape('cli should output help by default', (test) => {
+  test.plan(1);
+
+  execFile('node', [pkg.bin], null, (err, stdout) => {
+    test.ok(stdout.trim().indexOf(pkg.name + ' [options] <primary directory> <secondary directory>') !== -1, 'Help appeared');
+  });
+
+});
+
 tape('cli help output contains version number', function (test) {
   test.plan(2);
 
