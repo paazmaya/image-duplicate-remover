@@ -10,10 +10,11 @@ Too many images that are the same but might have different dates and other metad
 This tool compares images based on the following criteria:
 
 * [x] SHA-256 hash of the file, since `v0.1.0`
-* [ ] File size in bytes
-* [ ] Width and height
-* [ ] Bit depth
-* [ ] Number of unique colors
+* [ ] File size in bytes, will be in `v0.2.0`
+* [ ] Width and height, will be in `v0.3.0`
+* [ ] Bit depth, will be in `v0.3.0`
+* [ ] Number of unique colors, will be in `v0.3.0`
+* [ ] Image contents comparison, will be in `v0.4.0`
 
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
 
@@ -22,7 +23,9 @@ as sometimes the amount of files to compare is huge.
 
 ## Installation
 
-Make sure to have [GraphicsMagick](http://www.graphicsmagick.org/) available in the `PATH`.
+Starting with version `0.3.0`, additional tools are needed.
+
+Make sure to have [GraphicsMagick](http://www.graphicsmagick.org/) (minimum version `1.3.24`) available in the `PATH`.
 It can be installed for example in Mac via [Brew](http://brew.sh):
 
 ```sh
@@ -34,6 +37,8 @@ In Ubuntu it is usually available via:
 ```sh
 sudo apt-get install graphicsmagick
 ```
+
+Windows users could [download an installer package](http://www.graphicsmagick.org/INSTALL-windows.html#installing-using-installer-package).
 
 Now install the command line tool globally, which might need increased privileges:
 
@@ -91,10 +96,7 @@ Please make sure it is over 90% at all times.
 ## Version history
 
 * `v0.1.0` (2016-08-)
-    - Move code coverage from `instanbul` to `nyc`
-    - Test also in Windows, at [AppVeyor](https://ci.appveyor.com/project/paazmaya/image-foldarizer)
-    - Testing command line interface
-    - Gets the job simply done, hence first release
+    - Gets the job simply done with SHA-256 :neckbeard: checking, hence first release
 
 ## License
 

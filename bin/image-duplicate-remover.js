@@ -87,6 +87,7 @@ if (opts.help) {
 
 if (opts._.length !== 2) {
   console.error('Directories not specified');
+  console.log(optsParser.generateHelp());
   process.exit(1);
 }
 
