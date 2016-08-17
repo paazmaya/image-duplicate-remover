@@ -9,7 +9,10 @@ version: "{build}-{branch}"
 
 init:
   - git config --global core.longpaths true
-  - dir %PROGRAMFILES%\Internet Explorer
+  - dir "%PROGRAMFILES%\Internet Explorer"
+
+environment:
+  IE_BIN: "%PROGRAMFILES%\\Internet Explorer\\iexplore.exe"
 
 clone_depth: 1
 
