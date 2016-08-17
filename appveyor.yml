@@ -4,15 +4,13 @@ environment:
   matrix:
     - nodejs_version: "6"
     - nodejs_version: "4.2"
+  IE_BIN: "%PROGRAMFILES%\\Internet Explorer\\iexplore.exe"
 
 version: "{build}-{branch}"
 
 init:
   - git config --global core.longpaths true
   - dir "%PROGRAMFILES%\Internet Explorer"
-
-environment:
-  IE_BIN: "%PROGRAMFILES%\\Internet Explorer\\iexplore.exe"
 
 clone_depth: 1
 
