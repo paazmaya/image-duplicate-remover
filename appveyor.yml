@@ -9,7 +9,7 @@ version: "{build}-{branch}"
 
 init:
   - git config --global core.longpaths true
-  - npm install --global node-gyp
+  - dir %PROGRAMFILES%\Internet Explorer
 
 clone_depth: 1
 
