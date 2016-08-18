@@ -11,6 +11,7 @@ version: "{build}-{branch}"
 init:
   - git config --global core.longpaths true
   - dir "%PROGRAMFILES%\Internet Explorer"
+  - set
 
 clone_depth: 1
 
