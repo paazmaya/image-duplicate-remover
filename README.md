@@ -75,10 +75,12 @@ image-duplicate-remover -vn a b
 
 First thing to do is to file [an issue](https://github.com/paazmaya/image-duplicate-remover/issues).
 
-[Please refer to a GitHub blog post on how to create somewhat perfect pull request.](https://github.com/blog/1943-how-to-write-the-perfect-pull-request "How to write the perfect pull request")
+["A Beginner's Guide to Open Source: The Best Advice for Making your First Contribution"](http://hf.heidilabs.com/blog/a-beginners-guide-to-open-source-making-your-first-contribution).
 
-Then possibly open a Pull Request for solving the given issue.
-[ESLint](http://eslint.org) is used for linting the code, which can be executed by running;
+[Also there is a blog post about "45 Github Issues Dos and Don’ts"](https://davidwalsh.name/45-github-issues-dos-donts).
+
+Linting is done with [ESLint](http://eslint.org) and can be executed with `npm run lint`.
+There should be no errors appearing after any JavaScript file changes.
 
 ```sh
 npm install
