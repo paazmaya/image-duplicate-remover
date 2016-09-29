@@ -107,6 +107,10 @@ if (!fs.existsSync(secondaryDir)) {
 
 // Fire away
 duplicateRemover(primaryDir, secondaryDir, {
-  verbose: typeof opts.verbose === 'boolean' ? opts.verbose : false,
-  dryRun: typeof opts.dryRun === 'boolean' ? opts.dryRun : false
+  verbose: typeof opts.verbose === 'boolean' ?
+    opts.verbose :
+    false,
+  dryRun: typeof opts.dryRun === 'boolean' ?
+   opts.dryRun :
+   false
 });
