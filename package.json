@@ -44,14 +44,14 @@
   "dependencies": {
     "hasha": "^2.2.0",
     "image-extensions": "^1.1.0",
-    "optionator": "^0.8.1",
+    "optionator": "^0.8.2",
     "sqlite3": "^3.1.4"
   },
   "devDependencies": {
     "codecov": "^1.0.1",
-    "eslint": "^3.4.0",
-    "eslint-config-paazmaya": "^2.3.1",
-    "nyc": "^8.1.0",
+    "eslint": "^3.6.1",
+    "eslint-config-paazmaya": "^3.0.0",
+    "nyc": "^8.3.0",
     "tape": "^4.6.0"
   }
 }
