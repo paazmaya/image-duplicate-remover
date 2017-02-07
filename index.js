@@ -10,11 +10,13 @@
 
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs'),
+  readline = require('readline');
 
 const sqlite3 = require('sqlite3');
 
 const getImageFiles = require('./lib/get-image-files'),
+  findMatchingSha256 = require('./lib/find-matching-sha256'),
   removeFiles = require('./lib/remove-files'),
   storeImageData = require('./lib/store-image-data');
 
@@ -23,7 +25,7 @@ const INDEX_NOT_FOUND = -1;
 /**
  * Create and initialise SQLite database and tables, which by default is in memory.
  *
- * @param  {string} location Where shall the database be stored
+ * @param  {string} location Where shall the database be stored, defauts to ':memory:'
  * @returns {sqlite3.Database} Database instanse
  */
 const createDatabase = (location) => {
@@ -32,11 +34,12 @@ const createDatabase = (location) => {
     if (error) {
       console.error('Database opening/creation failed');
       console.error(error);
+      process.exit(1);
     }
     console.log('Database opened after it was possibly created');
   });
 
-  // Create tables needed. Alphaletically ordered keys after primary key and sha256
+  // Create tables that are needed. Alphaletically ordered keys after primary key and sha256
   db.serialize(() => {
     // https://www.sqlite.org/lang_createtable.html
     // https://www.sqlite.org/withoutrowid.html
@@ -47,6 +50,7 @@ const createDatabase = (location) => {
         filesize REAL,
         bitdepth REAL,
         height REAL,
+        timestamp REAL,
         uniquecolors REAL,
         width REAL
       ) WITHOUT ROWID
@@ -105,10 +109,11 @@ const saveDatabaseContents = (db, filename) => {
  * @param {boolean} options.verbose Print out current process
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
  * @param {string} options.metric   Method to use when comparing two images with GraphicsMagick
+ * @param {string} options.database Possible database file to be used with SQLite
  * @returns {void}
  */
 module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
-  const db = createDatabase();
+  const db = createDatabase(options.database);
 
   const primaryImages = getImageFiles(primaryDir, options);
   let secondaryImages = getImageFiles(secondaryDir, options);
@@ -123,14 +128,28 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
   }
 
   db.serialize(() => {
-    storeImageData(primaryImages, db);
+    storeImageData(primaryImages, db, options);
   });
 
   db.serialize(() => {
-    storeImageData(secondaryImages, db);
+    storeImageData(secondaryImages, db, options);
   });
 
-  removeFiles(primaryImages, secondaryImages, db, options).then((/*removedFiles*/) => {
+  findMatchingSha256(primaryImages, secondaryImages, db).then((matchingFiles) => {
+    const keys = Object.keys(matchingFiles);
+    console.log(`Total of ${keys.length} primary image files had matches under the secondary directory`);
+
+    keys.forEach((primaryItem) => {
+      console.log(`  ${primaryItem}`);
+      console.log(`    Number of matches ${matchingFiles[primaryItem].length}`);
+      matchingFiles[primaryItem].forEach((matchItem) => {
+        console.log(`      ${matchItem}`);
+      });
+    });
+
+    //console.log('matchingFiles:');
+    //console.log(matchingFiles);
+    // For each ask first readline
 
     saveDatabaseContents(db, 'database-content.json');
 
