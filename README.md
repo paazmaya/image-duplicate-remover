@@ -100,6 +100,8 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
+* `v0.2.0` (2017-)
+    - Enable the use of existing SQLite database
 * `v0.1.0` (2017-02-07)
     - Gets the job simply done with SHA-256 :neckbeard: checking, hence first release. Released 6 months late.
 

@@ -14,7 +14,7 @@ const path = require('path');
 
 const tape = require('tape'),
   getImageFiles = require('../../lib/get-image-files'),
-  findMatchingSha256 = require('../../lib/find-matching-sha256');
+  findMatching = require('../../lib/find-matching');
 
 tape('does not find any files when lists are empty', (test) => {
   test.plan(1);
@@ -28,12 +28,8 @@ tape('does not find any files when lists are empty', (test) => {
       callback(null, []);
     }
   };
-  const options = {
-    dryRun: true,
-    verbose: false
-  };
 
-  findMatchingSha256([], [], db, options).then((list) => {
+  findMatching([], [], db).then((list) => {
     test.equal(Object.keys(list).length, 0);
   });
 
@@ -61,7 +57,7 @@ tape('lists expected duplicates without removing on dry run', (test) => {
     }
   };
 
-  findMatchingSha256(listA, listB, db, options).then((list) => {
+  findMatching(listA, listB, db).then((list) => {
     test.equal(Object.keys(list).length, 0); // because database is empty
   });
 

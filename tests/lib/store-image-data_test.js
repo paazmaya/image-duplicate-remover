@@ -22,7 +22,8 @@ tape('inserts data to database when file exists', (test) => {
 
   const db = {
     prepare: function (query) {
-      test.equal(query, 'INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?)', 'Query prepared properly');
+      test.equal(query, 'INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 'Query prepared properly');
+
       return {
         run: function (values) {
           test.deepEqual(values, [
