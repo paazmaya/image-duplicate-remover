@@ -35,7 +35,6 @@ const createDatabase = (location) => {
       console.error(error);
       process.exit(1);
     }
-    console.log('Database opened after it was possibly created');
   });
 
   // Create tables that are needed. Alphaletically ordered keys after primary key and sha256
