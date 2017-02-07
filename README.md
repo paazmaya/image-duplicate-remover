@@ -20,6 +20,7 @@ Please note that the minimum supported version of [Node.js](https://nodejs.org/e
 
 Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files,
 as sometimes the amount of files to compare is huge.
+It is possible to reuse the resulting database file and skip reading the files, which is the most time consuming part.
 
 ## Installation
 
@@ -105,4 +106,3 @@ Please make sure it is over 90% at all times.
 Licensed under [the MIT license](LICENSE).
 
 Copyright (c) [Juga Paazmaya](https://paazmaya.fi) <paazmaya@yahoo.com>
-

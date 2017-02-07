@@ -40,9 +40,11 @@ const createDatabase = (location) => {
   });
 
   // Create tables that are needed. Alphaletically ordered keys after primary key and sha256
+  // TODO: Should be able to check if the table already exists
   db.serialize(() => {
     // https://www.sqlite.org/lang_createtable.html
     // https://www.sqlite.org/withoutrowid.html
+    /*
     db.run(`
       CREATE TABLE files (
         filepath TEXT PRIMARY KEY,
@@ -55,6 +57,7 @@ const createDatabase = (location) => {
         width REAL
       ) WITHOUT ROWID
     `);
+    */
   });
 
   return db;
@@ -110,6 +113,7 @@ const saveDatabaseContents = (db, filename) => {
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
  * @param {string} options.metric   Method to use when comparing two images with GraphicsMagick
  * @param {string} options.database Possible database file to be used with SQLite
+ * @param {boolean} options.skipReading Skip reading the directories, just use the existing database
  * @returns {void}
  */
 module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
@@ -127,13 +131,15 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
     console.log(`Found ${primaryImages.length} primary images to compare with ${secondaryImages.length} secondary images`);
   }
 
-  db.serialize(() => {
-    storeImageData(primaryImages, db, options);
-  });
+  if (!options.skipReading) {
+    db.serialize(() => {
+      storeImageData(primaryImages, db, options);
+    });
 
-  db.serialize(() => {
-    storeImageData(secondaryImages, db, options);
-  });
+    db.serialize(() => {
+      storeImageData(secondaryImages, db, options);
+    });
+  }
 
   findMatchingSha256(primaryImages, secondaryImages, db).then((matchingFiles) => {
     const keys = Object.keys(matchingFiles);
@@ -147,8 +153,6 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
       });
     });
 
-    //console.log('matchingFiles:');
-    //console.log(matchingFiles);
     // For each ask first readline
 
     saveDatabaseContents(db, 'database-content.json');

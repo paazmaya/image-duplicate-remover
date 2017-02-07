@@ -56,6 +56,18 @@ const optsParser = optionator({
       description: 'Verbose output, will print which file is currently being processed'
     },
     {
+      option: 'database',
+      alias: 'D',
+      type: 'String',
+      description: 'SQLite database to use'
+    },
+    {
+      option: 'skip-reading',
+      alias: 'S',
+      type: 'Boolean',
+      description: 'Skip reading the directories, just use the existing database. Requires database'
+    },
+    {
       option: 'dry-run',
       alias: 'n',
       type: 'Boolean',
@@ -82,6 +94,11 @@ if (opts.version) {
 
 if (opts.help) {
   console.log(optsParser.generateHelp());
+  process.exit(0);
+}
+
+if (opts.skipReading && !opts.database) {
+  console.log('Must have existing database defined, when skipping the reading part');
   process.exit(0);
 }
 
@@ -112,5 +129,11 @@ duplicateRemover(primaryDir, secondaryDir, {
     false,
   dryRun: typeof opts.dryRun === 'boolean' ?
    opts.dryRun :
+   false,
+  database: typeof opts.database === 'string' ?
+   opts.database :
+   null,
+  skipReading: typeof opts.skipReading === 'boolean' ?
+   opts.skipReading :
    false
 });
