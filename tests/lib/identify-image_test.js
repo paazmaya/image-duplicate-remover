@@ -46,7 +46,7 @@ tape('identify png image with spaces in its name', (test) => {
 tape('identify fails on text file', (test) => {
   test.plan(1);
 
-  const filepath = path.join(__dirname, '..', 'index_tape.js');
+  const filepath = path.join(__dirname, '..', 'index_test.js');
   const meta = identifyImage(filepath);
 
   test.deepEqual(meta, false);

@@ -10,11 +10,11 @@
 
 'use strict';
 
-const path = require('path');
+//const path = require('path');
 
 const tape = require('tape'),
   storeImageData = require('../../lib/store-image-data');
-
+/*
 tape('inserts data to database when file exists', (test) => {
   test.plan(3);
 
@@ -45,6 +45,7 @@ tape('inserts data to database when file exists', (test) => {
   storeImageData([filepath], db);
 
 });
+*/
 
 tape('does not use database when list is empty', (test) => {
   test.plan(1);

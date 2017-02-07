@@ -41,6 +41,74 @@ const getPixelColor = (filepath, x = 0, y = 0) => {
 */
 
 /**
+ * Remove a single file, based on the user input.
+ *
+ * @param {string} filepath  File that is asked to be deleted
+ * @param {object} options          Set of options that are all boolean
+ * @param {boolean} options.verbose Print out current process
+ * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
+ * @return {boolean} True when the file was removed
+ */
+const deleteConfirmFile = (filepath, options) => {
+  console.log(`      ${filepath}`);
+
+  const answer = readlineSync.question('      Delete the above file y/N: ');
+  if (answer.match(/^y(es)?$/i)) {
+
+    if (options.verbose) {
+      console.log(`      Removing "${filepath}"`);
+    }
+
+    if (!options.dryRun) {
+      //fs.unlinkSync(filepath);
+      return true;
+    }
+  }
+
+  return false;
+};
+
+/**
+ * Delete candicates from the list, based on user input, that are all duplicates to the item.
+ *
+ * @param {string} item     File that is kept
+ * @param {Array} list      Array of files that are matches to the item
+ * @param {object} options          Set of options that are all boolean
+ * @param {boolean} options.verbose Print out current process
+ * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
+ * @return {Number} Total number of files that were removed
+ */
+const deleteConfirmList = (item, list, options) => {
+  let total = 0;
+
+  console.log(`  ${item}`);
+  console.log(`    Number of matches ${list.length}`);
+
+  list.forEach((matchItem) => {
+    if (deleteConfirmFile(matchItem, options)) {
+      ++total;
+    }
+  });
+
+  return total;
+};
+
+const handleMatchingFiles = (matchingFiles, key, options) => {
+
+  const keys = Object.keys(matchingFiles);
+  console.log(`Total of ${keys.length} primary image files had exact "${key}" matches under the secondary directory`);
+
+  let total = 0;
+
+  keys.forEach((primaryItem) => {
+    const list = matchingFiles[primaryItem];
+    total += deleteConfirmList(primaryItem, list, options);
+  });
+
+  console.log(`Total of ${total} files removed`);
+};
+
+/**
  * Remove duplicates found from the secondary directory after comparing against the primary directory
  *
  * @param {string} primaryDir       Primary directory from which files will not be deleted
@@ -79,31 +147,15 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
     });
   }
 
-  findMatching(primaryImages, secondaryImages, db).then((matchingFiles) => {
-    const keys = Object.keys(matchingFiles);
-    console.log(`Total of ${keys.length} primary image files had matches under the secondary directory`);
+  findMatching(primaryImages, secondaryImages, db, 'sha256').then((matchingFiles) => {
+    handleMatchingFiles(matchingFiles, 'sha256', options);
 
-    keys.forEach((primaryItem) => {
-      console.log(`  ${primaryItem}`);
-      console.log(`    Number of matches ${matchingFiles[primaryItem].length}`);
-      matchingFiles[primaryItem].forEach((matchItem) => {
-        console.log(`      ${matchItem}`);
-        const answer = readlineSync.question('      Delete the above file y/N: ');
-        if (answer.match(/^y(es)?$/i)) {
-
-          if (options.verbose) {
-            console.log(`      Removing "${matchItem}"`);
-          }
-
-          if (!options.dryRun) {
-            //fs.unlinkSync(matchItem);
-          }
-        }
-      });
-    });
+    return findMatching(primaryImages, secondaryImages, db, 'filesize');
+  }).then((matchingFiles) => {
+    handleMatchingFiles(matchingFiles, 'filesize', options);
 
     // Testing purposes, to see what goes in there
-    database.save(db, 'database-content.json');
+    database.saveJSON(db, 'database-content.json');
 
     db.close();
   });

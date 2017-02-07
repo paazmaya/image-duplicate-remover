@@ -10,11 +10,12 @@
 
 'use strict';
 
-const path = require('path');
+//const path = require('path');
 
 const tape = require('tape'),
   readImage = require('../../lib/read-image');
 
+/*
 tape('inserts data to database when file exists', (test) => {
   test.plan(1);
 
@@ -30,6 +31,7 @@ tape('inserts data to database when file exists', (test) => {
     width: 1236
   });
 });
+*/
 
 tape('does not use database when file does not exist', (test) => {
   test.plan(1);
