@@ -10,14 +10,13 @@
 
 'use strict';
 
-const fs = require('fs'),
-  readline = require('readline');
+const fs = require('fs');
 
-const sqlite3 = require('sqlite3');
+const sqlite3 = require('sqlite3'),
+  readlineSync = require('readline-sync');
 
 const getImageFiles = require('./lib/get-image-files'),
   findMatchingSha256 = require('./lib/find-matching-sha256'),
-  removeFiles = require('./lib/remove-files'),
   storeImageData = require('./lib/store-image-data');
 
 const INDEX_NOT_FOUND = -1;
@@ -44,7 +43,6 @@ const createDatabase = (location) => {
   db.serialize(() => {
     // https://www.sqlite.org/lang_createtable.html
     // https://www.sqlite.org/withoutrowid.html
-    /*
     db.run(`
       CREATE TABLE files (
         filepath TEXT PRIMARY KEY,
@@ -57,7 +55,6 @@ const createDatabase = (location) => {
         width REAL
       ) WITHOUT ROWID
     `);
-    */
   });
 
   return db;
@@ -111,6 +108,7 @@ const saveDatabaseContents = (db, filename) => {
  * @param {object} options          Set of options that are all boolean
  * @param {boolean} options.verbose Print out current process
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
+ *
  * @param {string} options.metric   Method to use when comparing two images with GraphicsMagick
  * @param {string} options.database Possible database file to be used with SQLite
  * @param {boolean} options.skipReading Skip reading the directories, just use the existing database
@@ -150,11 +148,14 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
       console.log(`    Number of matches ${matchingFiles[primaryItem].length}`);
       matchingFiles[primaryItem].forEach((matchItem) => {
         console.log(`      ${matchItem}`);
+        const answer = readlineSync.question('      Delete the above file y/N: ');
+        if (answer.match(/^y(es)?$/i)) {
+          console.log('Deleting...');
+        }
       });
     });
 
-    // For each ask first readline
-
+    // Testing purposes, to see what goes in there
     saveDatabaseContents(db, 'database-content.json');
 
     db.close();

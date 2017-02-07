@@ -45,6 +45,7 @@
     "hasha": "^2.2.0",
     "image-extensions": "^1.1.0",
     "optionator": "^0.8.2",
+    "readline-sync": "~1.4.6",
     "sqlite3": "^3.1.8"
   },
   "devDependencies": {

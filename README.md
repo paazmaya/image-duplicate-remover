@@ -20,7 +20,9 @@ Please note that the minimum supported version of [Node.js](https://nodejs.org/e
 
 Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files,
 as sometimes the amount of files to compare is huge.
-It is possible to reuse the resulting database file and skip reading the files, which is the most time consuming part.
+
+It will be possible to reuse the resulting database file and skip reading the files, in the `v0.2.0` release.
+Reading the information from image file is the most time consuming part within the execution of this tool.
 
 ## Installation
 

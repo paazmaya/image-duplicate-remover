@@ -55,6 +55,7 @@ const optsParser = optionator({
       type: 'Boolean',
       description: 'Verbose output, will print which file is currently being processed'
     },
+    /*
     {
       option: 'database',
       alias: 'D',
@@ -66,7 +67,7 @@ const optsParser = optionator({
       alias: 'S',
       type: 'Boolean',
       description: 'Skip reading the directories, just use the existing database. Requires database'
-    },
+    },*/
     {
       option: 'dry-run',
       alias: 'n',
@@ -96,12 +97,12 @@ if (opts.help) {
   console.log(optsParser.generateHelp());
   process.exit(0);
 }
-
+/*
 if (opts.skipReading && !opts.database) {
   console.log('Must have existing database defined, when skipping the reading part');
   process.exit(0);
 }
-
+*/
 if (opts._.length !== 2) {
   console.error('Directories not specified');
   console.log(optsParser.generateHelp());
@@ -129,11 +130,13 @@ duplicateRemover(primaryDir, secondaryDir, {
     false,
   dryRun: typeof opts.dryRun === 'boolean' ?
    opts.dryRun :
-   false,
+   false
+  /*
   database: typeof opts.database === 'string' ?
    opts.database :
    null,
   skipReading: typeof opts.skipReading === 'boolean' ?
    opts.skipReading :
    false
+  */
 });
