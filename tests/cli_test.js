@@ -30,7 +30,7 @@ tape('cli should output version number', function (test) {
 tape('cli should output help by default', (test) => {
   test.plan(1);
 
-  execFile('node', [pkg.bin], null, (err, stdout) => {
+  execFile('node', [pkg.bin], null, (error, stdout) => {
     test.ok(stdout.trim().indexOf(pkg.name + ' [options] <primary directory> <secondary directory>') !== -1, 'Help appeared');
   });
 
@@ -76,6 +76,7 @@ tape('cli should fail when secondary directory do not exist', function (test) {
 
 });
 
+/*
 tape('cli should not remove anything when dry run used and duplicates are found', function (test) {
   test.plan(4);
 
@@ -92,5 +93,4 @@ tape('cli should not remove anything when dry run used and duplicates are found'
   });
 
 });
-
-
+*/

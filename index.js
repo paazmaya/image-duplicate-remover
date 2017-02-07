@@ -150,7 +150,14 @@ module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
         console.log(`      ${matchItem}`);
         const answer = readlineSync.question('      Delete the above file y/N: ');
         if (answer.match(/^y(es)?$/i)) {
-          console.log('Deleting...');
+
+          if (options.verbose) {
+            console.log(`      Removing "${matchItem}"`);
+          }
+
+          if (!options.dryRun) {
+            //fs.unlinkSync(matchItem);
+          }
         }
       });
     });

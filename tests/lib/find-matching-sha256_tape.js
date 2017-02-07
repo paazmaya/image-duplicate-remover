@@ -10,14 +10,13 @@
 
 'use strict';
 
-const fs = require('fs'),
-  path = require('path');
+const path = require('path');
 
 const tape = require('tape'),
   getImageFiles = require('../../lib/get-image-files'),
-  removeFiles = require('../../lib/remove-files');
+  findMatchingSha256 = require('../../lib/find-matching-sha256');
 
-tape('does not remove any files when lists are empty', (test) => {
+tape('does not find any files when lists are empty', (test) => {
   test.plan(1);
 
   const db = {
@@ -34,8 +33,8 @@ tape('does not remove any files when lists are empty', (test) => {
     verbose: false
   };
 
-  removeFiles([], [], db, options).then((list) => {
-    test.equal(list.length, 0);
+  findMatchingSha256([], [], db, options).then((list) => {
+    test.equal(Object.keys(list).length, 0);
   });
 
 });
@@ -62,8 +61,8 @@ tape('lists expected duplicates without removing on dry run', (test) => {
     }
   };
 
-  removeFiles(listA, listB, db, options).then((list) => {
-    test.equal(list.length, 0); // because database is empty
+  findMatchingSha256(listA, listB, db, options).then((list) => {
+    test.equal(Object.keys(list).length, 0); // because database is empty
   });
 
 });
