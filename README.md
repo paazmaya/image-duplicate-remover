@@ -10,7 +10,7 @@ Too many images that are the same but might have different dates and other metad
 This tool compares images based on the following criteria:
 
 * [x] SHA-256 hash of the file, since `v0.1.0`
-* [ ] File size in bytes, will be in `v0.2.0`
+* [x] File size in bytes, will be in `v0.2.0`
 * [ ] Width and height, will be in `v0.3.0`
 * [ ] Bit depth, will be in `v0.3.0`
 * [ ] Number of unique colors, will be in `v0.3.0`
@@ -100,8 +100,9 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
-* `v0.2.0` (2017-)
+* `v0.2.0` (2017-02-)
     - Enable the use of existing SQLite database
+    - Use `filesize` to find matches too, when `sha256` was not a match
 * `v0.1.0` (2017-02-07)
     - Gets the job simply done with SHA-256 :neckbeard: checking, hence first release. Released 6 months late.
 

@@ -60,7 +60,8 @@ const deleteConfirmFile = (filepath, options) => {
     }
 
     if (!options.dryRun) {
-      //fs.unlinkSync(filepath);
+      fs.unlinkSync(filepath);
+
       return true;
     }
   }
