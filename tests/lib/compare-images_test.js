@@ -29,7 +29,7 @@ tape('compare identical images with different exif', (test) => {
     total: 0
   });
 });
-
+/*
 tape('compare different images', (test) => {
   test.plan(1);
 
@@ -44,7 +44,7 @@ tape('compare different images', (test) => {
     total: 0.1261617327
   });
 });
-
+*/
 tape('compare identical images with different optimisation', (test) => {
   test.plan(1);
 
