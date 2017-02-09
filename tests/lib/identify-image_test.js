@@ -16,17 +16,15 @@ const tape = require('tape'),
   identifyImage = require('../../lib/identify-image');
 
 tape('identify jpeg image', (test) => {
-  test.plan(1);
+  test.plan(3);
 
   const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'jukka-paasonen.jpg');
   const meta = identifyImage(filepath);
 
-  test.deepEqual(meta, {
-    bitdepth: 8,
-    height: 200,
-    uniquecolors: 24441, // in windows, but in linux 24529
-    width: 200
-  });
+  // Check all properties, except the uniquecolors which differs in win/mac 24441 and linux 24529
+  test.equal(meta.bitdepth, 8);
+  test.equal(meta.height, 200);
+  test.equal(meta.width, 200);
 });
 
 tape('identify png image with spaces in its name', (test) => {
