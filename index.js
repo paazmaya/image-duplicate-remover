@@ -12,7 +12,8 @@
 
 const fs = require('fs');
 
-const readlineSync = require('readline-sync');
+const readlineSync = require('readline-sync'),
+  chalk = require('chalk');
 
 const database = require('./lib/database'),
   getImageFiles = require('./lib/get-image-files'),
@@ -50,13 +51,13 @@ const getPixelColor = (filepath, x = 0, y = 0) => {
  * @return {boolean} True when the file was removed
  */
 const deleteConfirmFile = (filepath, options) => {
-  console.log(`      ${filepath}`);
+  console.log(`${filepath}`);
 
-  const answer = readlineSync.question('      Delete the above file y/N: ');
+  const answer = readlineSync.question(chalk.red('Delete the above file y/N: '));
   if (answer.match(/^y(es)?$/i)) {
 
     if (options.verbose) {
-      console.log(`      Removing "${filepath}"`);
+      console.log(`Removing "${filepath}"`);
     }
 
     if (!options.dryRun) {
@@ -82,8 +83,8 @@ const deleteConfirmFile = (filepath, options) => {
 const deleteConfirmList = (item, list, options) => {
   let total = 0;
 
-  console.log(`  ${item}`);
-  console.log(`    Number of matches ${list.length}`);
+  console.log(chalk.underline(`${item}`));
+  console.log(`Number of matches ${list.length}`);
 
   list.forEach((matchItem) => {
     if (deleteConfirmFile(matchItem, options)) {
@@ -97,7 +98,7 @@ const deleteConfirmList = (item, list, options) => {
 const handleMatchingFiles = (matchingFiles, key, options) => {
 
   const keys = Object.keys(matchingFiles);
-  console.log(`Total of ${keys.length} primary image files had exact "${key}" matches under the secondary directory`);
+  console.log(chalk.bold(`Total of ${keys.length} primary image files had exact "${key}" matches under the secondary directory`));
 
   let total = 0;
 
@@ -106,7 +107,8 @@ const handleMatchingFiles = (matchingFiles, key, options) => {
     total += deleteConfirmList(primaryItem, list, options);
   });
 
-  console.log(`Total of ${total} files removed`);
+  console.log(chalk.bold(`Total of ${total} files removed`));
+  console.log(''); // In order to get empty line
 };
 
 /**
@@ -123,7 +125,7 @@ const handleMatchingFiles = (matchingFiles, key, options) => {
  * @param {boolean} options.skipReading Skip reading the directories, just use the existing database
  * @returns {void}
  */
-module.exports = function duplicateRemover (primaryDir, secondaryDir, options) {
+module.exports = (primaryDir, secondaryDir, options) => {
   const db = database.connect(options.database);
 
   const primaryImages = getImageFiles(primaryDir, options);
