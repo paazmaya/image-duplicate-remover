@@ -28,7 +28,7 @@ Reading the information from image file is the most time consuming part within t
 
 Starting with version `0.3.0`, additional tools are needed.
 
-Make sure to have [GraphicsMagick](http://www.graphicsmagick.org/) (minimum version `1.3.24`) available in the `PATH`.
+Make sure to have [GraphicsMagick](http://www.graphicsmagick.org/) (minimum version `1.3.18`) available in the `PATH`.
 It can be installed for example in Mac via [Brew](http://brew.sh):
 
 ```sh

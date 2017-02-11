@@ -10,13 +10,13 @@
 
 'use strict';
 
-//const path = require('path');
+const path = require('path');
 
 const tape = require('tape'),
   storeImageData = require('../../lib/store-image-data');
-/*
+
 tape('inserts data to database when file exists', (test) => {
-  test.plan(3);
+  test.plan(5);
 
   const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
 
@@ -26,15 +26,9 @@ tape('inserts data to database when file exists', (test) => {
 
       return {
         run: function (values) {
-          test.deepEqual(values, [
-            filepath,
-            '60673c95c25853d7e199d5f0d2632f99657383ad18a56e30ab464a1aa97d21c2',
-            3155,
-            8,
-            662,
-            2,
-            1236
-          ]);
+          test.ok(values.indexOf(filepath) !== -1, 'Has filepath');
+          test.ok(values.indexOf('60673c95c25853d7e199d5f0d2632f99657383ad18a56e30ab464a1aa97d21c2') !== -1, 'Has sha256');
+          test.ok(values.indexOf(3155) !== -1, 'Has filesize');
         },
         finalize: function () {
           test.pass('Finalised called as expected');
@@ -42,14 +36,14 @@ tape('inserts data to database when file exists', (test) => {
       };
     }
   };
-  storeImageData([filepath], db);
+  storeImageData([filepath], db, {});
 
 });
-*/
+
 
 tape('does not use database when list is empty', (test) => {
   test.plan(1);
 
-  const ret = storeImageData([]);
+  const ret = storeImageData([], null, {});
   test.notOk(ret);
 });

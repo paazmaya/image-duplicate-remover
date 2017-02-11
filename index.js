@@ -75,27 +75,33 @@ const deleteConfirmFile = (filepath, options) => {
  *
  * @param {string} item     File that is kept
  * @param {Array} list      Array of files that are matches to the item
+ * @param {sqlite3.Database} db Database instance
  * @param {object} options          Set of options that are all boolean
  * @param {boolean} options.verbose Print out current process
  * @param {boolean} options.dryRun  Do not touch any files, just show what could be done
  * @return {Number} Total number of files that were removed
  */
-const deleteConfirmList = (item, list, options) => {
+const deleteConfirmList = (item, list, db, options) => {
   let total = 0;
 
   console.log(chalk.underline(`${item}`));
   console.log(`Number of matches ${list.length}`);
 
+  const statement = db.prepare('DELETE FROM files WHERE filepath=?');
+
   list.forEach((matchItem) => {
     if (deleteConfirmFile(matchItem, options)) {
+      statement.run(matchItem);
       ++total;
     }
   });
 
+  statement.finalize();
+
   return total;
 };
 
-const handleMatchingFiles = (matchingFiles, key, options) => {
+const handleMatchingFiles = (matchingFiles, key, db, options) => {
 
   const keys = Object.keys(matchingFiles);
   console.log(chalk.bold(`Total of ${keys.length} primary image files had exact "${key}" matches under the secondary directory`));
@@ -104,7 +110,7 @@ const handleMatchingFiles = (matchingFiles, key, options) => {
 
   keys.forEach((primaryItem) => {
     const list = matchingFiles[primaryItem];
-    total += deleteConfirmList(primaryItem, list, options);
+    total += deleteConfirmList(primaryItem, list, db, options);
   });
 
   console.log(chalk.bold(`Total of ${total} files removed`));
@@ -151,11 +157,11 @@ module.exports = (primaryDir, secondaryDir, options) => {
   }
 
   findMatching(primaryImages, secondaryImages, db, 'sha256').then((matchingFiles) => {
-    handleMatchingFiles(matchingFiles, 'sha256', options);
+    handleMatchingFiles(matchingFiles, 'sha256', db, options);
 
     return findMatching(primaryImages, secondaryImages, db, 'filesize');
   }).then((matchingFiles) => {
-    handleMatchingFiles(matchingFiles, 'filesize', options);
+    handleMatchingFiles(matchingFiles, 'filesize', db, options);
 
     // Testing purposes, to see what goes in there
     database.saveJSON(db, 'database-content.json');
