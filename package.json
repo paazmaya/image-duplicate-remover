@@ -46,14 +46,14 @@
     "hasha": "~2.2.0",
     "image-extensions": "~1.1.0",
     "optionator": "~0.8.2",
-    "readline-sync": "~1.4.6",
+    "readline-sync": "~1.4.7",
     "sqlite3": "~3.1.8"
   },
   "devDependencies": {
-    "codecov": "^1.0.1",
-    "eslint": "^3.10.2",
-    "eslint-config-paazmaya": "^3.1.0",
-    "nyc": "^10.0.0",
+    "codecov": "^2.1.0",
+    "eslint": "^3.18.0",
+    "eslint-config-paazmaya": "^3.2.0",
+    "nyc": "^10.2.0",
     "tape": "^4.6.3"
   }
 }
