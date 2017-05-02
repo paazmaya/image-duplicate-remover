@@ -6,7 +6,7 @@
   "main": "index.js",
   "bin": "bin/image-duplicate-remover.js",
   "scripts": {
-    "lint": "eslint -c .eslintrc.json index.js bin lib",
+    "lint": "eslint index.js bin lib",
     "test": "nyc --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
     "coverage": "nyc --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
   },
@@ -51,9 +51,9 @@
   },
   "devDependencies": {
     "codecov": "^2.1.0",
-    "eslint": "^3.18.0",
+    "eslint": "^3.19.0",
     "eslint-config-paazmaya": "^3.2.0",
-    "nyc": "^10.2.0",
+    "nyc": "^10.3.0",
     "tape": "^4.6.3"
   }
 }
