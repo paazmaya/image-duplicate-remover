@@ -16,6 +16,8 @@ This tool compares images based on the following criteria:
 * [ ] Number of unique colors, will be in `v0.3.0`
 * [ ] Image contents comparison, will be in `v0.4.0`
 
+The idea is to start from stronger method, while progressing towards a weaker method.
+
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
 
 Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files,
@@ -106,7 +108,7 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
-* `v0.2.0` (2017-02-)
+* `v0.2.0` (2017-06-)
     - Enable the use of existing SQLite database
     - Use `filesize` to find matches too, when `sha256` was not a match
 * `v0.1.0` (2017-02-07)
