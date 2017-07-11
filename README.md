@@ -18,7 +18,7 @@ This tool compares images based on the following criteria:
 
 The idea is to start from stronger method, while progressing towards a weaker method.
 
-Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `4.2.0`.
+Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `6.9.5` (LTS).
 
 Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files,
 as sometimes the amount of files to compare is huge.
@@ -109,10 +109,11 @@ Please make sure it is over 90% at all times.
 ## Version history
 
 * `v0.2.0` (2017-06-)
-    - Enable the use of existing SQLite database
-    - Use `filesize` to find matches too, when `sha256` was not a match
+  - Enable the use of existing SQLite database
+  - Use `filesize` to find matches too, when `sha256` was not a match
+  - Minimum Node.js version lifted from `4.2.0` to `6.9.5`
 * `v0.1.0` (2017-02-07)
-    - Gets the job simply done with SHA-256 :neckbeard: checking, hence first release. Released 6 months late.
+  - Gets the job simply done with SHA-256 :neckbeard: checking, hence first release. Released 6 months late.
 
 ## License
 
