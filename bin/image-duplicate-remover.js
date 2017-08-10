@@ -128,12 +128,12 @@ duplicateRemover(primaryDir, secondaryDir, {
     opts.verbose :
     false,
   dryRun: typeof opts.dryRun === 'boolean' ?
-   opts.dryRun :
-   false,
+    opts.dryRun :
+    false,
   database: typeof opts.database === 'string' ?
-   opts.database :
-   null,
+    opts.database :
+    null,
   skipReading: typeof opts.skipReading === 'boolean' ?
-   opts.skipReading :
-   false
+    opts.skipReading :
+    false
 });
