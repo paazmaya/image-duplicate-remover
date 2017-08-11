@@ -47,13 +47,13 @@
     "image-extensions": "~1.1.0",
     "optionator": "~0.8.2",
     "readline-sync": "~1.4.7",
-    "sqlite3": "~3.1.8"
+    "sqlite3": "~3.1.9"
   },
   "devDependencies": {
-    "codecov": "^2.2.0",
-    "eslint": "^4.2.0",
-    "eslint-config-paazmaya": "^4.0.0",
-    "nyc": "^11.0.3",
-    "tape": "^4.7.0"
+    "codecov": "^2.3.0",
+    "eslint": "^4.4.1",
+    "eslint-config-paazmaya": "^4.1.0",
+    "nyc": "^11.1.0",
+    "tape": "^4.8.0"
   }
 }
