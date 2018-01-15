@@ -42,18 +42,18 @@
   },
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.1.0",
+    "chalk": "^2.3.0",
     "hasha": "~3.0.0",
     "image-extensions": "~1.1.0",
     "optionator": "~0.8.2",
     "readline-sync": "~1.4.7",
-    "sqlite3": "~3.1.9"
+    "sqlite3": "~3.1.13"
   },
   "devDependencies": {
     "codecov": "^3.0.0",
-    "eslint": "^4.5.0",
-    "eslint-config-paazmaya": "^4.1.0",
-    "nyc": "^11.1.0",
+    "eslint": "^4.15.0",
+    "eslint-config-paazmaya": "^4.3.0",
+    "nyc": "^11.4.1",
     "tape": "^4.8.0"
   }
 }
