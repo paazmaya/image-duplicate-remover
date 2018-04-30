@@ -19,7 +19,7 @@ This tool compares images based on the following criteria:
 
 The idea is to start from stronger method, while progressing towards a weaker method.
 
-Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `6.9.5`, which is [the Long Term Support (LTS) version](https://github.com/nodejs/LTS#lts-schedule1).
+Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `8.11.1`, which is [the active Long Term Support (LTS) version](https://github.com/nodejs/Release#release-schedule).
 
 Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files,
 as sometimes the amount of files to compare is huge.
