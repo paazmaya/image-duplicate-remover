@@ -13,7 +13,8 @@
 const path = require('path');
 
 const tape = require('tape'),
-  storeImageData = require('../../lib/store-image-data');
+  storeImageData = require('../../lib/store-image-data'),
+  database = require('../../lib/database');
 
 tape('inserts data to database when file exists', (test) => {
   test.plan(5);
@@ -22,7 +23,7 @@ tape('inserts data to database when file exists', (test) => {
 
   const db = {
     prepare: function (query) {
-      test.equal(query, 'INSERT INTO files VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 'Query prepared properly');
+      test.equal(query, 'INSERT OR REPLACE INTO files VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 'Query prepared properly');
 
       return {
         run: function (values) {
@@ -40,6 +41,20 @@ tape('inserts data to database when file exists', (test) => {
 
 });
 
+tape('updates data to database when file already has a row', (test) => {
+  test.plan(1);
+
+  const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
+  const db = database.connect();
+  storeImageData([filepath], db, {});
+  storeImageData([filepath], db, {});
+  db.serialize(() => {
+    db.get(`SELECT COUNT(filepath) AS total FROM files WHERE filepath = '${filepath}' GROUP BY filepath`, (err, row) => {
+      test.equal(row.total, 1);
+    });
+  });
+
+});
 
 tape('does not use database when list is empty', (test) => {
   test.plan(1);

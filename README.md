@@ -109,10 +109,10 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
-* `v0.2.0` (2017-06-)
+* `v0.2.0` (2018-06-)
   - Enable the use of existing SQLite database
   - Use `filesize` to find matches too, when `sha256` was not a match
-  - Minimum Node.js version lifted from `4.2.0` to `6.9.5`
+  - Minimum Node.js version lifted from `4.2.0` to `8.11.1`
 * `v0.1.0` (2017-02-07)
   - Gets the job simply done with SHA-256 :neckbeard: checking, hence first release. Released 6 months late.
 
