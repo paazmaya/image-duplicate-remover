@@ -109,7 +109,7 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
-* `v0.2.0` (2018-06-)
+* `v0.2.0` (2018-05-14)
   - Enable the use of existing SQLite database
   - Use `filesize` to find matches too, when `sha256` was not a match
   - Minimum Node.js version lifted from `4.2.0` to `8.11.1`
