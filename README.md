@@ -52,6 +52,10 @@ Now install the command line tool globally, which might need increased privilege
 [sudo] npm install --global image-duplicate-remover
 ```
 
+Please note that while in Linux and with `sudo`, some of the dependencies might fail to install,
+which can be fixed in some case by `sudo npm install --global --unsafe-perm image-duplicate-remover`.
+See more details at [docs.npmjs.com](https://docs.npmjs.com/misc/config#unsafe-perm).
+
 ## Command line options
 
 The available command line options can be seen via command:
