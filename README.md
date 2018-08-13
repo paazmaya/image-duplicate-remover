@@ -5,7 +5,7 @@
 [![Ubuntu build Status](https://travis-ci.org/paazmaya/image-duplicate-remover.svg?branch=master)](https://travis-ci.org/paazmaya/image-duplicate-remover)
 [![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/master?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/master)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
-[![Dependency Status](https://gemnasium.com/badges/github.com/paazmaya/image-duplicate-remover.svg)](https://gemnasium.com/github.com/paazmaya/image-duplicate-remover)
+[![Dependencies Status](https://david-dm.org/paazmaya/image-duplicate-remover/status.svg)](https://david-dm.org/paazmaya/image-duplicate-remover)
 
 Too many images that are the same but might have different dates and other metadata.
 This tool compares images based on the following criteria:
