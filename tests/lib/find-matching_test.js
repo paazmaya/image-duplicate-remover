@@ -20,12 +20,13 @@ tape('does not find any files when lists are empty', (test) => {
   test.plan(1);
 
   const db = {
-    serialize: function (callback) {
-      callback();
-    },
-    all: function (query, callback) {
-      test.fail('All queried unexpectedly');
-      callback(null, []);
+    prepare: function (callback) {
+      return {
+        all: function () {
+          test.fail('All queried unexpectedly');
+          return null;
+        }
+      };
     }
   };
 
@@ -36,7 +37,7 @@ tape('does not find any files when lists are empty', (test) => {
 });
 
 tape('lists expected duplicates without removing on dry run', (test) => {
-  test.plan(5); // all called 4 times, amount of files
+  test.plan(4); // all called 4 times, amount of files
 
   const options = {
     dryRun: true,
@@ -48,12 +49,12 @@ tape('lists expected duplicates without removing on dry run', (test) => {
   const listB = getImageFiles(dirB, options);
 
   const db = {
-    serialize: function (callback) {
-      callback();
-    },
-    all: function (query, callback) {
-      test.ok(query.indexOf('SELECT B.filepath FROM files A, files B') === 0, 'Query prepared properly');
-      callback(null, []);
+    prepare: function (query) {
+      test.equal(query, findMatching.QUERY_PREPARE);
+
+      return {
+        all: function () {}
+      };
     }
   };
 

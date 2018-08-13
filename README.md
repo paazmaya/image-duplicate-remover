@@ -21,7 +21,7 @@ The idea is to start from stronger method, while progressing towards a weaker me
 
 Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `8.11.1`, which is [the active Long Term Support (LTS) version](https://github.com/nodejs/Release#release-schedule).
 
-Underneath [SQLite](https://github.com/mapbox/node-sqlite3) is used for storing any meta information about the files,
+Underneath [SQLite](https://github.com/JoshuaWise/better-sqlite3) is used for storing any meta information about the files,
 as sometimes the amount of files to compare is huge.
 
 It will be possible to reuse the resulting database file and skip reading the files, in the `v0.2.0` release.
@@ -109,6 +109,8 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
+* `v0.2.1` (2018-08-13)
+  - Switched from using `node-sqlite3` to `better-sqlite3` #15
 * `v0.2.0` (2018-05-14)
   - Enable the use of existing SQLite database
   - Use `filesize` to find matches too, when `sha256` was not a match

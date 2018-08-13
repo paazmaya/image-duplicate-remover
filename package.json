@@ -42,12 +42,12 @@
   },
   "license": "MIT",
   "dependencies": {
+    "better-sqlite3": "~4.1.4",
     "chalk": "~2.4.1",
     "hasha": "~3.0.0",
     "image-extensions": "~1.1.0",
     "optionator": "~0.8.2",
-    "readline-sync": "~1.4.9",
-    "sqlite3": "~4.0.0"
+    "readline-sync": "~1.4.9"
   },
   "devDependencies": {
     "codecov": "^3.0.1",

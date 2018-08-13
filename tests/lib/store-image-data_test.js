@@ -17,7 +17,7 @@ const tape = require('tape'),
   database = require('../../lib/database');
 
 tape('inserts data to database when file exists', (test) => {
-  test.plan(5);
+  test.plan(4);
 
   const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
 
@@ -30,9 +30,6 @@ tape('inserts data to database when file exists', (test) => {
           test.ok(values.indexOf(filepath) !== -1, 'Has filepath');
           test.ok(values.indexOf('60673c95c25853d7e199d5f0d2632f99657383ad18a56e30ab464a1aa97d21c2') !== -1, 'Has sha256');
           test.ok(values.indexOf(3155) !== -1, 'Has filesize');
-        },
-        finalize: function () {
-          test.pass('Finalised called as expected');
         }
       };
     }
@@ -48,12 +45,9 @@ tape('updates data to database when file already has a row', (test) => {
   const db = database.connect();
   storeImageData([filepath], db, {});
   storeImageData([filepath], db, {});
-  db.serialize(() => {
-    db.get(`SELECT COUNT(filepath) AS total FROM files WHERE filepath = '${filepath}' GROUP BY filepath`, (err, row) => {
-      test.equal(row.total, 1);
-    });
-  });
 
+  const row = db.prepare(`SELECT COUNT(filepath) AS total FROM files WHERE filepath = '${filepath}' GROUP BY filepath`).get();
+  test.equal(row.total, 1);
 });
 
 tape('does not use database when list is empty', (test) => {
