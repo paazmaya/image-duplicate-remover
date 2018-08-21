@@ -54,7 +54,7 @@ const deleteConfirmFile = (filepath, options) => {
   console.log(`${filepath}`);
 
   const answer = readlineSync.question(chalk.red('Delete the above file y/N: '));
-  if (answer.match(/^y(es)?$/i)) {
+  if (answer.match(/^y(es)?$/iu)) {
 
     if (options.verbose) {
       console.log(`Removing "${filepath}"`);
