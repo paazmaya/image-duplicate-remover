@@ -42,4 +42,4 @@ node_modules
 # Debugging output
 database-content.json
 *.db
-package-lock.json
+
