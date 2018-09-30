@@ -30,9 +30,12 @@ tape('does not find any files when lists are empty', (test) => {
     }
   };
 
-  findMatching([], [], db).then((list) => {
-    test.equal(Object.keys(list).length, 0);
-  });
+  findMatching([], [], db)
+    .then((list) => {
+      test.equal(Object.keys(list).length, 0);
+    }).catch(err => {
+      console.log('Something went wrong: ' + err);
+    });
 
 });
 
@@ -58,8 +61,10 @@ tape('lists expected duplicates without removing on dry run', (test) => {
     }
   };
 
-  findMatching(listA, listB, db).then((list) => {
-    test.equal(Object.keys(list).length, 0); // because database is empty
-  });
-
+  findMatching(listA, listB, db)
+    .then((list) => {
+      test.equal(Object.keys(list).length, 0); // because database is empty
+    }).catch(err => {
+      console.log('Something went wrong: ' + err);
+    });
 });
