@@ -47,7 +47,7 @@ sudo apt-get install graphicsmagick
 
 Windows users could [download an installer package](http://www.graphicsmagick.org/INSTALL-windows.html#installing-using-installer-package).
 
-Now install the command line tool globally, which might need increased privileges:
+Now install the command line tool globally, which might need increased privileges,you can use it without sudo when you are root:
 
 ```sh
 [sudo] npm install --global image-duplicate-remover
