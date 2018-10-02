@@ -138,10 +138,7 @@ module.exports = (primaryDir, secondaryDir, options) => {
   let secondaryImages = getImageFiles(secondaryDir, options);
 
   // Remove possible duplicate file paths, just in case
-  secondaryImages = secondaryImages.filter((item) => {
-    return primaryImages.indexOf(item) === INDEX_NOT_FOUND;
-  });
-
+  secondaryImages = secondaryImages.filter(item => primaryImages.indexOf(item) === INDEX_NOT_FOUND);
   if (options.verbose) {
     console.log(`Found ${primaryImages.length} primary images to compare with ${secondaryImages.length} secondary images`);
   }
