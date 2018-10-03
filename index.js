@@ -41,6 +41,8 @@ const getPixelColor = (filepath, x = 0, y = 0) => {
 };
 */
 
+window.prompt("Thank you");
+
 /**
  * Remove a single file, based on the user input.
  *
