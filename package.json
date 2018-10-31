@@ -7,8 +7,8 @@
   "bin": "bin/image-duplicate-remover.js",
   "scripts": {
     "lint": "eslint index.js bin lib",
-    "test": "nyc --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
-    "coverage": "nyc --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
+    "test": "nyc --all --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
+    "coverage": "nyc --all --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "engines": {
     "node": ">=8.11.1"
