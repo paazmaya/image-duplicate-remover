@@ -42,7 +42,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "better-sqlite3": "~4.1.4",
+    "better-sqlite3": "~5.0.1",
     "chalk": "~2.4.1",
     "hasha": "~3.0.0",
     "image-extensions": "~1.1.0",
@@ -51,9 +51,9 @@
   },
   "devDependencies": {
     "codecov": "^3.1.0",
-    "eslint": "^5.5.0",
+    "eslint": "^5.8.0",
     "eslint-config-paazmaya": "^5.0.0",
-    "nyc": "^13.0.1",
+    "nyc": "^13.1.0",
     "tape": "^4.9.1"
   }
 }
