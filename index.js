@@ -144,13 +144,8 @@ module.exports = (primaryDir, secondaryDir, options) => {
   }
 
   if (!options.skipReading) {
-    db.serialize(() => {
-      storeImageData(primaryImages, db, options);
-    });
-
-    db.serialize(() => {
-      storeImageData(secondaryImages, db, options);
-    });
+    storeImageData(primaryImages, db, options);
+    storeImageData(secondaryImages, db, options);
   }
 
   findMatching(primaryImages, secondaryImages, db, 'sha256').then((matchingFiles) => {
