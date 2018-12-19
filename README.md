@@ -114,7 +114,7 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
-* `v0.3.0` (2018-12-19)
+* `v0.2.2` (2018-12-19)
   - Use [`npm-shrinkwrap.json`](https://docs.npmjs.com/files/shrinkwrap.json) for locking the working set of 3rd party dependencies
   - Previous migration from `node-sqlite3` to `better-sqlite3` was not properly tested #25
   - Renamed the column `sha256` to `hash` in the database table `files`
