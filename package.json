@@ -1,6 +1,6 @@
 {
   "name": "image-duplicate-remover",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Remove duplicate images from the two given directories recursively",
   "homepage": "https://github.com/paazmaya/image-duplicate-remover",
   "main": "index.js",
@@ -43,7 +43,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "better-sqlite3": "~5.2.0",
+    "better-sqlite3": "~5.2.1",
     "chalk": "~2.4.1",
     "hasha": "~3.0.0",
     "image-extensions": "~1.1.0",

@@ -1,6 +1,6 @@
 {
   "name": "image-duplicate-remover",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
@@ -237,9 +237,9 @@
       }
     },
     "better-sqlite3": {
-      "version": "5.2.0",
-      "resolved": "https://registry.npmjs.org/better-sqlite3/-/better-sqlite3-5.2.0.tgz",
-      "integrity": "sha512-jcrsuySida9dmIJ2+XOklH6Xw8bnYJfT+KoSs9JCNH93Ji6TMoVRkbqR9jyfBqDdAR2BEy4BTC/FrX0nRxu9yA==",
+      "version": "5.2.1",
+      "resolved": "https://registry.npmjs.org/better-sqlite3/-/better-sqlite3-5.2.1.tgz",
+      "integrity": "sha512-FAqPi+jUl6VBBDZpIZPtva+VcYAxw3sbXKjImNBPvK1TmU6bCuaPn42XuNk6VL6Vhjl5KBZpeIesxJlDqTFBqA==",
       "requires": {
         "integer": "^2.1.0",
         "tar": "^4.4.6"

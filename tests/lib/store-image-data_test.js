@@ -28,7 +28,7 @@ tape('inserts data to database when file exists', (test) => {
       return {
         run: function (values) {
           test.ok(values.indexOf(filepath) !== -1, 'Has filepath');
-          test.ok(values.indexOf('60673c95c25853d7e199d5f0d2632f99657383ad18a56e30ab464a1aa97d21c2') !== -1, 'Has sha256');
+          test.ok(values.indexOf('60673c95c25853d7e199d5f0d2632f99657383ad18a56e30ab464a1aa97d21c2') !== -1, 'Has hash');
           test.ok(values.indexOf(3155) !== -1, 'Has filesize');
         }
       };
