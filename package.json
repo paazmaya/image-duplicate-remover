@@ -1,20 +1,17 @@
 {
   "name": "image-duplicate-remover",
-  "version": "0.5.0",
+  "version": "0.2.2",
   "description": "Remove duplicate images from the two given directories recursively",
   "homepage": "https://github.com/paazmaya/image-duplicate-remover",
   "main": "index.js",
-  "type": "module",
-  "bin": {
-    "image-duplicate-remover": "bin/image-duplicate-remover.js"
-  },
+  "bin": "bin/image-duplicate-remover.js",
   "scripts": {
-    "lint": "oxlint",
-    "test": "c8 --all --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
-    "coverage": "c8 --all --exclude tests report --reporter=text-lcov > coverage.lcov"
+    "lint": "eslint index.js bin lib",
+    "test": "nyc --all --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
+    "coverage": "nyc --all --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "engines": {
-    "node": ">=24.12.0"
+    "node": ">=8.11.1"
   },
   "files": [
     "bin",
@@ -39,21 +36,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/paazmaya/image-duplicate-remover.git"
+    "url": "git@github.com:paazmaya/image-duplicate-remover.git"
   },
   "bugs": {
     "url": "https://github.com/paazmaya/image-duplicate-remover/issues"
   },
   "license": "MIT",
   "dependencies": {
-    "chalk": "5.6.2",
-    "optionator": "0.9.4",
-    "readline-sync": "1.4.10",
-    "tozan": "8.0.0"
+    "better-sqlite3": "~5.2.1",
+    "chalk": "~2.4.1",
+    "hasha": "~3.0.0",
+    "image-extensions": "~1.1.0",
+    "optionator": "~0.8.2",
+    "readline-sync": "~1.4.9"
   },
   "devDependencies": {
-    "c8": "11.0.0",
-    "tape": "5.9.0",
-    "oxlint": "1.70.0"
+    "codecov": "^3.1.0",
+    "eslint": "^5.10.0",
+    "eslint-config-paazmaya": "^5.1.0",
+    "nyc": "^13.2.0",
+    "tape": "^4.9.1"
   }
 }
