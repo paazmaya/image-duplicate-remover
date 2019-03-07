@@ -180,9 +180,9 @@
       "dev": true
     },
     "better-sqlite3": {
-      "version": "5.2.1",
-      "resolved": "https://registry.npmjs.org/better-sqlite3/-/better-sqlite3-5.2.1.tgz",
-      "integrity": "sha512-FAqPi+jUl6VBBDZpIZPtva+VcYAxw3sbXKjImNBPvK1TmU6bCuaPn42XuNk6VL6Vhjl5KBZpeIesxJlDqTFBqA==",
+      "version": "5.4.0",
+      "resolved": "https://registry.npmjs.org/better-sqlite3/-/better-sqlite3-5.4.0.tgz",
+      "integrity": "sha512-Uj1ZYOcq1GtFyFgJgqMVDoDLTy1B1pM9+bULnlX8szRX4cPjE/7JbKxCzQGhYlZlLkHQvtXXhCZ3skqsQ2byMA==",
       "requires": {
         "integer": "^2.1.0",
         "tar": "^4.4.6"
