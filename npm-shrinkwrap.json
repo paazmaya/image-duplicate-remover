@@ -658,9 +658,9 @@
       "dev": true
     },
     "hasha": {
-      "version": "3.0.0",
-      "resolved": "https://registry.npmjs.org/hasha/-/hasha-3.0.0.tgz",
-      "integrity": "sha1-UqMvq4Vp1BymmmH/GiFPjrfIvTk=",
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/hasha/-/hasha-4.0.0.tgz",
+      "integrity": "sha512-l1Ly05OPK1xy9c1TEJafatzvA8KaDuiPh1Zai+OURc8U6y2BHS6keIV6mPhYJezgVIaAl8qU49mPC2IrlNLxow==",
       "requires": {
         "is-stream": "^1.0.1"
       }
