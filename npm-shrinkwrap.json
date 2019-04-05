@@ -662,11 +662,12 @@
       "dev": true
     },
     "hasha": {
-      "version": "4.0.0",
-      "resolved": "https://registry.npmjs.org/hasha/-/hasha-4.0.0.tgz",
-      "integrity": "sha512-l1Ly05OPK1xy9c1TEJafatzvA8KaDuiPh1Zai+OURc8U6y2BHS6keIV6mPhYJezgVIaAl8qU49mPC2IrlNLxow==",
+      "version": "5.0.0",
+      "resolved": "https://registry.npmjs.org/hasha/-/hasha-5.0.0.tgz",
+      "integrity": "sha512-PqWdhnQhq6tqD32hZv+l1e5mJHNSudjnaAzgAHfkGiU0ABN6lmbZF8abJIulQHbZ7oiHhP8yL6O910ICMc+5pw==",
       "requires": {
-        "is-stream": "^1.0.1"
+        "is-stream": "^1.1.0",
+        "type-fest": "^0.3.0"
       }
     },
     "https-proxy-agent": {
@@ -2467,6 +2468,11 @@
       "requires": {
         "prelude-ls": "~1.1.2"
       }
+    },
+    "type-fest": {
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-0.3.0.tgz",
+      "integrity": "sha512-fg3sfdDdJDtdHLUpeGsf/fLyG1aapk6zgFiYG5+MDUPybGrJemH4SLk5tP7hGRe8ntxjg0q5LYW53b6YpJIQ9Q=="
     },
     "uri-js": {
       "version": "4.2.2",
