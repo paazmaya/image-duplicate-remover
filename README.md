@@ -114,6 +114,9 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
+* `v0.2.3` (2019-05-29)
+  - Update dependencies to avoid any security issues
+  - Update tested [GraphicsMagick](https://sourceforge.net/projects/graphicsmagick/) to version `1.3.31`
 * `v0.2.2` (2018-12-19)
   - Use [`npm-shrinkwrap.json`](https://docs.npmjs.com/files/shrinkwrap.json) for locking the working set of 3rd party dependencies
   - Previous migration from `node-sqlite3` to `better-sqlite3` was not properly tested #25
