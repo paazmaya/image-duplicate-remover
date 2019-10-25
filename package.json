@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "codecov": "3.6.1",
-    "eslint": "6.5.1",
+    "eslint": "6.6.0",
     "eslint-config-paazmaya": "6.1.0",
     "nyc": "14.1.1",
     "tape": "4.11.0"
