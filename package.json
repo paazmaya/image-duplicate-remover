@@ -11,7 +11,7 @@
     "coverage": "nyc --all --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "engines": {
-    "node": ">=8.11.1"
+    "node": ">=10.13.0"
   },
   "files": [
     "bin",
