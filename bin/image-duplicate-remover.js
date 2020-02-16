@@ -10,7 +10,6 @@
  * Licensed under the MIT license
  */
 
-'use strict';
 
 const fs = require('fs'),
   path = require('path');

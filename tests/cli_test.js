@@ -8,7 +8,7 @@
  * Licensed under the MIT license
  */
 
-'use strict';
+
 
 const fs = require('fs'),
   path = require('path'),
@@ -20,7 +20,7 @@ const tape = require('tape');
 
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 
-tape('cli should output version number', function (test) {
+tape('cli should output version number', (test) => {
   test.plan(1);
 
   execFile('node', [pkg.bin, '-V'], null, function (error, stdout) {
@@ -38,7 +38,7 @@ tape('cli should output help by default', (test) => {
 
 });
 
-tape('cli help output contains version number', function (test) {
+tape('cli help output contains version number', (test) => {
   test.plan(2);
 
   execFile('node', [pkg.bin, '-h'], null, function (error, stdout) {
@@ -49,7 +49,7 @@ tape('cli help output contains version number', function (test) {
 
 });
 
-tape('cli should fail when directories not specified', function (test) {
+tape('cli should fail when directories not specified', (test) => {
   test.plan(1);
 
   execFile('node', [pkg.bin], null, function (error, stdout, stderr) {
@@ -58,7 +58,7 @@ tape('cli should fail when directories not specified', function (test) {
 
 });
 
-tape('cli should fail when primary directory do not exist', function (test) {
+tape('cli should fail when primary directory do not exist', (test) => {
   test.plan(2);
 
   execFile('node', [pkg.bin, 'not-around-here', 'tests/fixtures'], null, function (error, stdout, stderr) {
@@ -68,7 +68,7 @@ tape('cli should fail when primary directory do not exist', function (test) {
 
 });
 
-tape('cli should fail when secondary directory do not exist', function (test) {
+tape('cli should fail when secondary directory do not exist', (test) => {
   test.plan(2);
 
   execFile('node', [pkg.bin, 'tests/fixtures', 'not-around-here'], null, function (error, stdout, stderr) {
@@ -79,7 +79,7 @@ tape('cli should fail when secondary directory do not exist', function (test) {
 });
 
 /*
-tape('cli should not remove anything when dry run used and duplicates are found', function (test) {
+tape('cli should not remove anything when dry run used and duplicates are found', (test) => {
   test.plan(4);
 
   const dirA = path.join(__dirname, 'fixtures', 'a');
