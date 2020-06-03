@@ -8,8 +8,6 @@
  * Licensed under the MIT license
  */
 
-
-
 /*
 const tape = require('tape'),
   database = require('../../lib/database');

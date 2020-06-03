@@ -8,8 +8,6 @@
  * Licensed under the MIT license
  */
 
-
-
 const path = require('path');
 
 const tape = require('tape'),
@@ -20,7 +18,7 @@ tape('does not find any files when lists are empty', (test) => {
   test.plan(1);
 
   const db = {
-    prepare: function (callback) {
+    prepare: function () {
       return {
         all: function () {
           test.fail('All queried unexpectedly');

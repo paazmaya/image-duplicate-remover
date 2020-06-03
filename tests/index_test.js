@@ -8,8 +8,6 @@
  * Licensed under the MIT license
  */
 
-
-
 const fs = require('fs'),
   path = require('path');
 
@@ -22,4 +20,3 @@ tape('a function is exported', (test) => {
   test.equal(typeof duplicateRemover, 'function');
   test.equal(duplicateRemover.length, 3, 'has three arguments');
 });
-

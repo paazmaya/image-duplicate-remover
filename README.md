@@ -13,10 +13,10 @@ This tool compares images based on the following criteria:
 
 * [x] SHA-256 hash of the file, since `v0.1.0`
 * [x] File size in bytes, will be in `v0.2.0`
-* [ ] Width and height, will be in `v0.3.0`
-* [ ] Bit depth, will be in `v0.3.0`
-* [ ] Number of unique colors, will be in `v0.3.0`
-* [ ] Image contents comparison, will be in `v0.4.0`
+* [ ] Width and height, will be in `v0.4.0`
+* [ ] Bit depth, will be in `v0.5.0`
+* [ ] Number of unique colors, will be in `v0.6.0`
+* [ ] Image contents comparison, will be in `v0.7.0`
 
 The idea is to start from stronger method, while progressing towards a weaker method.
 
@@ -114,6 +114,9 @@ Please make sure it is over 90% at all times.
 
 ## Version history
 
+* `v0.3.0` (2020-06-03)
+  - Minimum Node.js version lifted from `8.11.1` to `10.13.0`
+  - Run tests also against Node.js version 14. Now versions 10 (Travis), 12 (AppVeyor), and 14 (Travis) of Node.js are covered
 * `v0.2.3` (2019-05-29)
   - Update dependencies to avoid any security issues
   - Update tested [GraphicsMagick](https://sourceforge.net/projects/graphicsmagick/) to version `1.3.31`
