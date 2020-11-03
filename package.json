@@ -51,7 +51,7 @@
     "readline-sync": "~1.4.10"
   },
   "devDependencies": {
-    "codecov": "3.8.0",
+    "codecov": "3.8.1",
     "eslint": "7.12.1",
     "eslint-config-paazmaya": "7.1.0",
     "nyc": "15.1.0",
