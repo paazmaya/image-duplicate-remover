@@ -56,6 +56,6 @@
     "eslint": "7.20.0",
     "eslint-config-paazmaya": "7.2.0",
     "nyc": "15.1.0",
-    "tape": "5.1.1"
+    "tape": "5.2.0"
   }
 }
