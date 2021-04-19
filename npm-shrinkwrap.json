@@ -14,7 +14,7 @@
         "image-extensions": "~1.1.0",
         "optionator": "~0.9.1",
         "readline-sync": "~1.4.10",
-        "tozan": "~5.1.1"
+        "tozan": "~5.1.0"
       },
       "bin": {
         "image-duplicate-remover": "bin/image-duplicate-remover.js"
