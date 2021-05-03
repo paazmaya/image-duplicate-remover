@@ -52,7 +52,7 @@
     "tozan": "~5.1.0"
   },
   "devDependencies": {
-    "codecov": "3.8.1",
+    "codecov": "3.8.2",
     "eslint": "7.25.0",
     "eslint-config-paazmaya": "7.2.0",
     "nyc": "15.1.0",
