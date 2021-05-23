@@ -8,10 +8,16 @@ dist: trusty
 language: node_js
 node_js:
   - "10"
+install:
+  - export CXX="g++-5"
+  - npm install
 addons:
   apt:
+    sources:
+    - ubuntu-toolchain-r-test
     packages:
     - graphicsmagick
+    - g++-5
 before_script:
   - gm version
 script:
