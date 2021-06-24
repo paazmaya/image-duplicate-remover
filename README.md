@@ -2,7 +2,7 @@
 
 > Remove duplicate images from the two given directories recursively
 
-[![Ubuntu build Status](https://travis-ci.org/paazmaya/image-duplicate-remover.svg?branch=master)](https://travis-ci.org/paazmaya/image-duplicate-remover)
+[![Ubuntu build Status](https://travis-ci.com/paazmaya/image-duplicate-remover.svg?branch=master)](https://travis-ci.com/paazmaya/image-duplicate-remover)
 [![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/master?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/master)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
 [![Dependencies Status](https://david-dm.org/paazmaya/image-duplicate-remover/status.svg)](https://david-dm.org/paazmaya/image-duplicate-remover)
@@ -104,7 +104,7 @@ npm install
 npm run lint
 ```
 
-Automated testing is done against [Ubuntu Trusty at Travis CI](https://travis-ci.org/paazmaya/image-duplicate-remover/)
+Automated testing is done against [Ubuntu Trusty at Travis CI](https://travis-ci.com/paazmaya/image-duplicate-remover/)
 and [Windows at AppVeyor](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover).
 
 Unit tests are written with [`tape`](https://github.com/substack/tape) and can be executed with `npm test`.
