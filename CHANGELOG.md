@@ -4,7 +4,8 @@ This changelog covers the version history and possible upcoming changes.
 It follows the guidance from https://keepachangelog.com/en/1.0.0/.
 
 ## Unreleased `v0.x.0` (2021)
-- Move testing with Node.js version 14 to GitHub Actions, away from Travis CI, since Travis has now stricter limitations on usage. Travis in now used to test only with Node.js version 10.
+- Move testing with Node.js version 14 to GitHub Actions, away from Travis CI, since Travis has now stricter limitations on usage. Travis in now used to test only with Node.js version 16.
+- Minimum supported Node.js version lifted from `10.13.0` to `14.15.0`
 
 ## `v0.3.0` (2020-06-03)
 - Minimum Node.js version lifted from `8.11.1` to `10.13.0`
