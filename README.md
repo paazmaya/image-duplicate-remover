@@ -4,8 +4,8 @@
 
 [![Ubuntu build Status](https://app.travis-ci.com/paazmaya/image-duplicate-remover.svg?branch=master)](https://app.travis-ci.com/paazmaya/image-duplicate-remover)
 [![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/master?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/master)
+[![Node.js v14 CI](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml/badge.svg)](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
-
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=paazmaya_image-duplicate-remover&metric=code_smells)](https://sonarcloud.io/dashboard?id=paazmaya_image-duplicate-remover)
 
 Too many images that are the same but might have different dates and other metadata.
