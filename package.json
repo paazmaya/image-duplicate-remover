@@ -4,9 +4,10 @@
   "description": "Remove duplicate images from the two given directories recursively",
   "homepage": "https://github.com/paazmaya/image-duplicate-remover",
   "main": "index.js",
+  "type": "module",
   "bin": "bin/image-duplicate-remover.js",
   "scripts": {
-    "lint": "eslint index.js bin lib",
+    "lint": "eslint *.js bin lib",
     "test": "nyc --all --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
     "coverage": "nyc --all --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
   },
@@ -53,7 +54,7 @@
   },
   "devDependencies": {
     "codecov": "3.8.3",
-    "eslint": "8.27.0",
+    "eslint": "8.28.0",
     "eslint-config-paazmaya": "8.0.0",
     "eslint-plugin-node": "11.1.0",
     "nyc": "15.1.0",
