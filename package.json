@@ -44,7 +44,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "better-sqlite3": "~7.6.0",
+    "better-sqlite3": "~8.0.0",
     "chalk": "~4.1.2",
     "hasha": "~5.2.2",
     "image-extensions": "~1.1.0",
