@@ -8,8 +8,8 @@
  * Licensed under the MIT license
  */
 
-const tape = require('tape'),
-  isMedia = require('../../lib/is-media');
+import tape from 'tape';
+import isMedia from '../../lib/is-media.js';
 
 tape('recognises mov file as media', (test) => {
   test.plan(3);

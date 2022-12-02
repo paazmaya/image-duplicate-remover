@@ -8,16 +8,16 @@
  * Licensed under the MIT license
  */
 
-//const path = require('path');
+//import path from 'path';
 
-const tape = require('tape'),
-  readImage = require('../../lib/read-image');
+import tape from 'tape';
+import readImage from '../../lib/read-image.js';
 
 /*
 tape('inserts data to database when file exists', (test) => {
   test.plan(1);
 
-  const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
+  const filepath = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
   const actual = readImage(filepath);
   test.deepEqual(actual, {
     filepath: filepath,

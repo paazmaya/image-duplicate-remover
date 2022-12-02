@@ -8,24 +8,24 @@
  * Licensed under the MIT license
  */
 
-const fs = require('fs');
+import fs from 'fs';
 
-const readlineSync = require('readline-sync'),
-  chalk = require('chalk');
+import readlineSync from 'readline-sync';
+import chalk from 'chalk';
 
-const database = require('./lib/database'),
-  getImageFiles = require('./lib/get-image-files'),
-  findMatching = require('./lib/find-matching'),
-  storeImageData = require('./lib/store-image-data');
+import database from './lib/database.js';
+import getImageFiles from './lib/get-image-files.js';
+import findMatching from './lib/find-matching.js';
+import storeImageData from './lib/store-image-data.js';
 
 const INDEX_NOT_FOUND = -1;
 
 /**
  * Get the pixel color for the given position in the image
  *
- * @param  {string} filepath Image file path
- * @param  {Number} x        Position in the image
- * @param  {Number} y        Position in the image
+ * @param {string} filepath Image file path
+ * @param {Number} x        Position in the image
+ * @param {Number} y        Position in the image
  * @return {string|bool}     Color value or false when failed
  */
 /*
@@ -129,7 +129,7 @@ const handleMatchingFiles = (matchingFiles, key, db, options) => {
  * @param {boolean} options.skipReading Skip reading the directories, just use the existing database
  * @returns {void}
  */
-module.exports = (primaryDir, secondaryDir, options) => {
+export default (primaryDir, secondaryDir, options) => {
   const db = database.connect(options.database);
 
   const primaryImages = getImageFiles(primaryDir, options);

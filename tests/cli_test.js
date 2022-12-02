@@ -8,15 +8,15 @@
  * Licensed under the MIT license
  */
 
-const fs = require('fs'),
-  path = require('path'),
-  {
+import fs from 'fs';
+import path from 'path';
+import {
     execFile
-  } = require('child_process');
+} from 'child_process';
 
-const tape = require('tape');
+import tape from 'tape';
 
-const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
+import pkg from '../package.json' assert { type: 'json' };
 
 tape('cli should output version number', (test) => {
   test.plan(1);
@@ -80,8 +80,8 @@ tape('cli should fail when secondary directory do not exist', (test) => {
 tape('cli should not remove anything when dry run used and duplicates are found', (test) => {
   test.plan(4);
 
-  const dirA = path.join(__dirname, 'fixtures', 'a');
-  const dirB = path.join(__dirname, 'fixtures', 'b');
+  const dirA = path.join('tests', 'fixtures', 'a');
+  const dirB = path.join('tests', 'fixtures', 'b');
   const initLengthB = fs.readdirSync(dirB);
 
   execFile('node', [pkg.bin, '-n', dirA, dirB], null, function (error, stdout, stderr) {

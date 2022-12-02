@@ -8,10 +8,10 @@
  * Licensed under the MIT license
  */
 
-const path = require('path');
+import path from 'path';
 
-const tape = require('tape'),
-  getImageFiles = require('../../lib/get-image-files');
+import tape from 'tape';
+import getImageFiles from '../../lib/get-image-files.js';
 
 const options = {
   dryRun: true,
@@ -21,7 +21,7 @@ const options = {
 tape('finds fixtures', (test) => {
   test.plan(1);
 
-  const dirpath = path.join(__dirname, '..', 'fixtures', 'a');
+  const dirpath = path.join('tests', 'fixtures', 'a');
   const list = getImageFiles(dirpath, options);
 
   test.equal(list.length, 4);

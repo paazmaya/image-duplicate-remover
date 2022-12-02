@@ -8,11 +8,11 @@
  * Licensed under the MIT license
  */
 
-const fs = require('fs'),
-  path = require('path');
+import fs from 'fs';
+import path from 'path';
 
-const tape = require('tape'),
-  duplicateRemover = require('../index');
+import tape from 'tape';
+import duplicateRemover from '../index.js';
 
 tape('a function is exported', (test) => {
   test.plan(2);

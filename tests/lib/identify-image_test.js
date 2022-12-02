@@ -8,15 +8,15 @@
  * Licensed under the MIT license
  */
 
-const path = require('path');
+import path from 'path';
 
-const tape = require('tape'),
-  identifyImage = require('../../lib/identify-image');
+import tape from 'tape';
+import identifyImage from '../../lib/identify-image.js';
 
 tape('identify jpeg image', (test) => {
   test.plan(3);
 
-  const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'jukka-paasonen.jpg');
+  const filepath = path.join('tests', 'fixtures', 'a', 'jukka-paasonen.jpg');
   const meta = identifyImage(filepath);
 
   // Check all properties, except the uniquecolors which differs in win/mac 24441 and linux 24529
@@ -28,7 +28,7 @@ tape('identify jpeg image', (test) => {
 tape('identify png image with spaces in its name', (test) => {
   test.plan(1);
 
-  const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
+  const filepath = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
   const meta = identifyImage(filepath);
 
   test.deepEqual(meta, {
@@ -42,7 +42,7 @@ tape('identify png image with spaces in its name', (test) => {
 tape('identify fails on text file', (test) => {
   test.plan(1);
 
-  const filepath = path.join(__dirname, '..', 'index_test.js');
+  const filepath = path.join('tests', 'index_test.js');
   const meta = identifyImage(filepath);
 
   test.deepEqual(meta, false);

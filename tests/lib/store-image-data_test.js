@@ -8,16 +8,16 @@
  * Licensed under the MIT license
  */
 
-const path = require('path');
+import path from 'path';
 
-const tape = require('tape'),
-  storeImageData = require('../../lib/store-image-data'),
-  database = require('../../lib/database');
+import tape from 'tape';
+import storeImageData from '../../lib/store-image-data.js';
+import database from '../../lib/database.js';
 
 tape('inserts data to database when file exists', (test) => {
   test.plan(4);
 
-  const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
+  const filepath = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
 
   const db = {
     prepare: function (query) {
@@ -39,7 +39,7 @@ tape('inserts data to database when file exists', (test) => {
 tape('updates data to database when file already has a row', (test) => {
   test.plan(1);
 
-  const filepath = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
+  const filepath = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
   const db = database.connect();
   storeImageData([filepath], db, {});
   storeImageData([filepath], db, {});

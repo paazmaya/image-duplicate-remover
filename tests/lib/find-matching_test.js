@@ -8,11 +8,11 @@
  * Licensed under the MIT license
  */
 
-const path = require('path');
+import path from 'path';
 
-const tape = require('tape'),
-  getImageFiles = require('../../lib/get-image-files'),
-  findMatching = require('../../lib/find-matching');
+import tape from 'tape';
+import getImageFiles from '../../lib/get-image-files.js';
+import findMatching from '../../lib/find-matching.js';
 
 tape('does not find any files when lists are empty', (test) => {
   test.plan(1);
@@ -45,9 +45,9 @@ tape('lists expected duplicates without removing on dry run', (test) => {
     dryRun: true,
     verbose: false
   };
-  const dirA = path.join(__dirname, '..', 'fixtures', 'a');
+  const dirA = path.join('tests', 'fixtures', 'a');
   const listA = getImageFiles(dirA, options);
-  const dirB = path.join(__dirname, '..', 'fixtures', 'b');
+  const dirB = path.join('tests', 'fixtures', 'b');
   const listB = getImageFiles(dirB, options);
 
   const db = {

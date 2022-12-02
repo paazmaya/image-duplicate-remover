@@ -8,16 +8,16 @@
  * Licensed under the MIT license
  */
 
-const path = require('path');
+import path from 'path';
 
-const tape = require('tape'),
-  compareImages = require('../../lib/compare-images');
+import tape from 'tape';
+import compareImages from '../../lib/compare-images.js';
 
 tape('compare identical images with different exif', (test) => {
   test.plan(1);
 
-  const a = path.join(__dirname, '..', 'fixtures', 'a', 'jukka-paasonen.jpg');
-  const b = path.join(__dirname, '..', 'fixtures', 'b', 'jukka-paasonen.jpg');
+  const a = path.join('tests', 'fixtures', 'a', 'jukka-paasonen.jpg');
+  const b = path.join('tests', 'fixtures', 'b', 'jukka-paasonen.jpg');
   const data = compareImages(a, b);
 
   test.deepEqual(data, {
@@ -31,8 +31,8 @@ tape('compare identical images with different exif', (test) => {
 tape('compare different images', (test) => {
   test.plan(1);
 
-  const a = path.join(__dirname, '..', 'fixtures', 'a', 'black-white-red.png');
-  const b = path.join(__dirname, '..', 'fixtures', 'b', 'black-white-violet.png');
+  const a = path.join('tests', 'fixtures', 'a', 'black-white-red.png');
+  const b = path.join('tests', 'fixtures', 'b', 'black-white-violet.png');
   const data = compareImages(a, b);
 
   test.deepEqual(data, {
@@ -46,8 +46,8 @@ tape('compare different images', (test) => {
 tape('compare identical images with different optimisation', (test) => {
   test.plan(1);
 
-  const a = path.join(__dirname, '..', 'fixtures', 'a', 'You Dont Know npm.png');
-  const b = path.join(__dirname, '..', 'fixtures', 'b', 'You Dont Know npm.png');
+  const a = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
+  const b = path.join('tests', 'fixtures', 'b', 'You Dont Know npm.png');
   const data = compareImages(a, b);
 
   test.deepEqual(data, {

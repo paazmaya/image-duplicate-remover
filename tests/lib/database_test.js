@@ -9,8 +9,8 @@
  */
 
 /*
-const tape = require('tape'),
-  database = require('../../lib/database');
+import tape from 'tape';
+import database from '../../lib/database.js';
 
 tape('creates new table in memory when initialising', (test) => {
   const db = database.createDatabase();
