@@ -50,7 +50,7 @@
     "image-extensions": "~1.1.0",
     "optionator": "~0.9.1",
     "readline-sync": "~1.4.10",
-    "tozan": "~6.0.0"
+    "tozan": "~6.1.0"
   },
   "devDependencies": {
     "codecov": "3.8.3",
