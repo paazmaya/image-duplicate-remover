@@ -3,7 +3,12 @@
 This changelog covers the version history and possible upcoming changes.
 It follows the guidance from https://keepachangelog.com/en/1.0.0/.
 
-## Unreleased `v0.x.0` (2021)
+## Unreleased
+
+## v0.4.0` (2023-06-xx)
+
+- It's all ES Modules now
+- Start testing against Node.js v18
 - Move testing with Node.js version 14 to GitHub Actions, away from Travis CI, since Travis has now stricter limitations on usage. Travis in now used to test only with Node.js version 16.
 - Minimum supported Node.js version lifted from `10.13.0` to `14.15.0`
 
