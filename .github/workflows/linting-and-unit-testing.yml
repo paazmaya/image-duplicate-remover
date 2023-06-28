@@ -10,6 +10,7 @@ jobs:
     steps:
     - name: Install dependencies
     - run: sudo apt-get install graphicsmagick
+    - run : gm version
 
     - uses: actions/checkout@v3
 

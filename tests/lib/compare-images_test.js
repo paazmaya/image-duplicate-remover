@@ -13,7 +13,7 @@ import path from 'path';
 import tape from 'tape';
 import compareImages from '../../lib/compare-images.js';
 
-tape('compare identical images with different exif', (test) => {
+tape('compareImages - compare identical images with different exif', (test) => {
   test.plan(1);
 
   const a = path.join('tests', 'fixtures', 'a', 'jukka-paasonen.jpg');
@@ -28,7 +28,7 @@ tape('compare identical images with different exif', (test) => {
   });
 });
 /*
-tape('compare different images', (test) => {
+tape('compareImages - compare different images', (test) => {
   test.plan(1);
 
   const a = path.join('tests', 'fixtures', 'a', 'black-white-red.png');
@@ -43,7 +43,7 @@ tape('compare different images', (test) => {
   });
 });
 */
-tape('compare identical images with different optimisation', (test) => {
+tape('compareImages - compare identical images with different optimisation', (test) => {
   test.plan(1);
 
   const a = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');

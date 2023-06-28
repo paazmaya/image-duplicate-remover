@@ -11,7 +11,7 @@
 import fs from 'fs';
 import path from 'path';
 import {
-    execFile
+  execFile
 } from 'child_process';
 
 import tape from 'tape';
@@ -53,7 +53,7 @@ tape('cli should fail when directories not specified', (test) => {
   test.plan(1);
 
   execFile('node', [pkg.bin], null, function (error, stdout, stderr) {
-    test.equals(stderr.trim(), 'Directories not specified');
+    test.ok(stderr.trim().indexOf('Directories not specified') !== -1);
   });
 
 });

@@ -14,7 +14,7 @@ import tape from 'tape';
 import readImage from '../../lib/read-image.js';
 
 /*
-tape('inserts data to database when file exists', (test) => {
+tape('readImage - inserts data to database when file exists', (test) => {
   test.plan(1);
 
   const filepath = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
@@ -31,7 +31,7 @@ tape('inserts data to database when file exists', (test) => {
 });
 */
 
-tape('does not use database when file does not exist', (test) => {
+tape('readImage - does not use database when file does not exist', (test) => {
   test.plan(1);
 
   const filepath = 'i am not here';

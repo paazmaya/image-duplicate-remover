@@ -13,7 +13,7 @@ import path from 'path';
 import tape from 'tape';
 import identifyImage from '../../lib/identify-image.js';
 
-tape('identify jpeg image', (test) => {
+tape('identifyImage - identify jpeg image', (test) => {
   test.plan(3);
 
   const filepath = path.join('tests', 'fixtures', 'a', 'jukka-paasonen.jpg');
@@ -25,7 +25,7 @@ tape('identify jpeg image', (test) => {
   test.equal(meta.width, 200);
 });
 
-tape('identify png image with spaces in its name', (test) => {
+tape('identifyImage - identify png image with spaces in its name', (test) => {
   test.plan(1);
 
   const filepath = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
@@ -39,7 +39,7 @@ tape('identify png image with spaces in its name', (test) => {
   });
 });
 
-tape('identify fails on text file', (test) => {
+tape('identifyImage - identify fails on text file', (test) => {
   test.plan(1);
 
   const filepath = path.join('tests', 'index_test.js');
@@ -48,7 +48,7 @@ tape('identify fails on text file', (test) => {
   test.deepEqual(meta, false);
 });
 
-tape('identify fails on non existing file', (test) => {
+tape('identifyImage - identify fails on non existing file', (test) => {
   test.plan(1);
 
   const filepath = 'not-here-to-be-found';

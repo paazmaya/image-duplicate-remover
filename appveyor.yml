@@ -2,7 +2,7 @@
 
 environment:
   matrix:
-    - nodejs_version: "16"
+    - nodejs_version: "18"
   IE_BIN: "%PROGRAMFILES%\\Internet Explorer\\iexplore.exe"
 
 version: "{build}-{branch}"
@@ -22,8 +22,8 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - appveyor DownloadFile "https://downloads.sourceforge.net/project/graphicsmagick/graphicsmagick-binaries/1.3.31/GraphicsMagick-1.3.31-Q16-win64-dll.exe"
-  - GraphicsMagick-1.3.31-Q16-win64-dll.exe /SP /VERYSILENT /NORESTART /NOICONS /DIR=%CD%\gm
+  - appveyor DownloadFile "https://downloads.sourceforge.net/project/graphicsmagick/graphicsmagick-binaries/1.3.40/GraphicsMagick-1.3.40-Q16-win64-dll.exe"
+  - GraphicsMagick-1.3.40-Q16-win64-dll.exe /SP /VERYSILENT /NORESTART /NOICONS /DIR=%CD%\gm
   - set PATH=%CD%\gm;%PATH%
   - npm install
 

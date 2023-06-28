@@ -7,7 +7,7 @@ dist: trusty
 
 language: node_js
 node_js:
-  - "16"
+  - "20"
 install:
   - export CXX="g++-5"
   - npm install

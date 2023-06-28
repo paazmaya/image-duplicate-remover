@@ -4,7 +4,7 @@
 
 [![Ubuntu build Status](https://app.travis-ci.com/paazmaya/image-duplicate-remover.svg?branch=master)](https://app.travis-ci.com/paazmaya/image-duplicate-remover)
 [![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/master?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/master)
-[![Node.js v14 CI](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml/badge.svg)](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml)
+[![Node.js v18 CI](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml/badge.svg)](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=paazmaya_image-duplicate-remover&metric=code_smells)](https://sonarcloud.io/dashboard?id=paazmaya_image-duplicate-remover)
 
@@ -13,14 +13,14 @@ This tool compares images based on the following criteria:
 
 * [x] SHA-256 hash of the file, since `v0.1.0`
 * [x] File size in bytes, will be in `v0.2.0`
-* [ ] Width and height, will be in `v0.4.0`
-* [ ] Bit depth, will be in `v0.5.0`
-* [ ] Number of unique colors, will be in `v0.6.0`
-* [ ] Image contents comparison, will be in `v0.7.0`
+* [ ] Width and heig
+* [ ] Bit dept
+* [ ] Number of unique colors
+* [ ] Image contents comparison
 
 The idea is to start from stronger method, while progressing towards a weaker method.
 
-Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `14.15.0`, which is [the active Long Term Support (LTS) version](https://github.com/nodejs/Release#release-schedule).
+Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `18.12.0`, which is [the active Long Term Support (LTS) version](https://github.com/nodejs/Release#release-schedule).
 
 Underneath [SQLite](https://github.com/JoshuaWise/better-sqlite3) is used for storing any meta information about the files,
 as sometimes the amount of files to compare is huge.

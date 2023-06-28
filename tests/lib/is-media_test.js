@@ -11,7 +11,7 @@
 import tape from 'tape';
 import isMedia from '../../lib/is-media.js';
 
-tape('recognises mov file as media', (test) => {
+tape('isMedia - recognises mov file as media', (test) => {
   test.plan(3);
 
   test.ok(isMedia('awesome.mov'));
@@ -19,7 +19,7 @@ tape('recognises mov file as media', (test) => {
   test.ok(isMedia('awesome-.s.1.mov'));
 });
 
-tape('recognises mts file as media', (test) => {
+tape('isMedia - recognises mts file as media', (test) => {
   test.plan(3);
 
   test.ok(isMedia('VIDEO.mts'));

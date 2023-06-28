@@ -1,6 +1,6 @@
 {
   "name": "image-duplicate-remover",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Remove duplicate images from the two given directories recursively",
   "homepage": "https://github.com/paazmaya/image-duplicate-remover",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "coverage": "c8 --all --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "engines": {
-    "node": ">=14.15.0"
+    "node": ">=18.12.0"
   },
   "files": [
     "bin",
@@ -44,13 +44,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "better-sqlite3": "~8.4.0",
-    "chalk": "~5.2.0",
-    "hasha": "~5.2.2",
-    "image-extensions": "~1.1.0",
-    "optionator": "~0.9.1",
-    "readline-sync": "~1.4.10",
-    "tozan": "~6.1.0"
+    "better-sqlite3": "8.4.0",
+    "chalk": "5.2.0",
+    "hasha": "5.2.2",
+    "optionator": "0.9.3",
+    "readline-sync": "1.4.10",
+    "tozan": "7.0.1"
   },
   "devDependencies": {
     "codecov": "3.8.3",

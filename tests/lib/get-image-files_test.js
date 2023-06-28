@@ -18,7 +18,7 @@ const options = {
   verbose: false
 };
 
-tape('finds fixtures', (test) => {
+tape('getImageFiles - finds fixtures', (test) => {
   test.plan(1);
 
   const dirpath = path.join('tests', 'fixtures', 'a');

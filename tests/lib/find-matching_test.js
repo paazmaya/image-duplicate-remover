@@ -12,9 +12,9 @@ import path from 'path';
 
 import tape from 'tape';
 import getImageFiles from '../../lib/get-image-files.js';
-import findMatching from '../../lib/find-matching.js';
+import findMatching, { QUERY_PREPARE } from '../../lib/find-matching.js';
 
-tape('does not find any files when lists are empty', (test) => {
+tape('findMatching - does not find any files when lists are empty', (test) => {
   test.plan(1);
 
   const db = {
@@ -38,7 +38,7 @@ tape('does not find any files when lists are empty', (test) => {
 
 });
 
-tape('lists expected duplicates without removing on dry run', (test) => {
+tape('findMatching - lists expected duplicates without removing on dry run', (test) => {
   test.plan(4); // all called 4 times, amount of files
 
   const options = {
@@ -52,7 +52,7 @@ tape('lists expected duplicates without removing on dry run', (test) => {
 
   const db = {
     prepare: function (query) {
-      test.equal(query, findMatching.QUERY_PREPARE);
+      test.equal(query, QUERY_PREPARE);
 
       return {
         all: function () {}

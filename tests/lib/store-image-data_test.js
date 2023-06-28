@@ -14,7 +14,7 @@ import tape from 'tape';
 import storeImageData from '../../lib/store-image-data.js';
 import database from '../../lib/database.js';
 
-tape('inserts data to database when file exists', (test) => {
+tape('storeImageData - inserts data to database when file exists', (test) => {
   test.plan(4);
 
   const filepath = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
@@ -36,7 +36,7 @@ tape('inserts data to database when file exists', (test) => {
 
 });
 
-tape('updates data to database when file already has a row', (test) => {
+tape('storeImageData - updates data to database when file already has a row', (test) => {
   test.plan(1);
 
   const filepath = path.join('tests', 'fixtures', 'a', 'You Dont Know npm.png');
@@ -48,7 +48,7 @@ tape('updates data to database when file already has a row', (test) => {
   test.equal(row.total, 1);
 });
 
-tape('does not use database when list is empty', (test) => {
+tape('storeImageData - does not use database when list is empty', (test) => {
   test.plan(1);
 
   const ret = storeImageData([], null, {});
