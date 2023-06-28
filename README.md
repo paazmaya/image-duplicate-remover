@@ -77,7 +77,7 @@ image-duplicate-remover [options] <primary directory> <secondary directory>
   -S, --skip-reading     Skip reading the directories, just use the existing database. Requires database
   -n, --dry-run          Try it out without actually removing anything
 
-Version 0.2.0
+Version 0.4.0
 ```
 
 ### Example commands
