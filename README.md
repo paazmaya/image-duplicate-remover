@@ -2,7 +2,6 @@
 
 > Remove duplicate images from the two given directories recursively
 
-[![Ubuntu build Status](https://app.travis-ci.com/paazmaya/image-duplicate-remover.svg?branch=master)](https://app.travis-ci.com/paazmaya/image-duplicate-remover)
 [![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/master?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/master)
 [![Node.js v18 CI](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml/badge.svg)](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
