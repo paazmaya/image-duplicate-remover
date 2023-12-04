@@ -12,7 +12,7 @@ This tool compares images based on the following criteria:
 
 * [x] SHA-256 hash of the file, since `v0.1.0`
 * [x] File size in bytes, will be in `v0.2.0`
-* [ ] Width and heig
+* [ ] Width and height
 * [ ] Bit dept
 * [ ] Number of unique colors
 * [ ] Image contents comparison
