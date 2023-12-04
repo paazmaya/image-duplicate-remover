@@ -1,12 +1,12 @@
 {
   "name": "image-duplicate-remover",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "image-duplicate-remover",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "license": "MIT",
       "dependencies": {
         "better-sqlite3": "9.2.0",

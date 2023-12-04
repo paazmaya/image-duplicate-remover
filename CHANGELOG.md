@@ -5,6 +5,11 @@ It follows the guidance from https://keepachangelog.com/en/1.0.0/.
 
 ## Unreleased
 
+## `v0.4.1` (2023-12-04)
+
+- No more testing at Travis CI, due to very limited usage availability
+- Remove `hasha` dependency, since the same functionality is used from `tozan`
+
 ## `v0.4.0` (2023-06-28)
 
 - It's all ES Modules now
