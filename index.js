@@ -8,7 +8,7 @@
  * Licensed under the MIT license
  */
 
-import fs from 'fs';
+import fs from 'node:fs';
 
 import readlineSync from 'readline-sync';
 import chalk from 'chalk';

@@ -8,7 +8,7 @@
  * Licensed under the MIT license
  */
 
-import path from 'path';
+import path from 'node:path';
 
 import tape from 'tape';
 import identifyImage from '../../lib/identify-image.js';
