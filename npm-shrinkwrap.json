@@ -9,7 +9,7 @@
       "version": "0.4.1",
       "license": "MIT",
       "dependencies": {
-        "better-sqlite3": "9.2.0",
+        "better-sqlite3": "9.2.2",
         "chalk": "5.3.0",
         "optionator": "0.9.3",
         "readline-sync": "1.4.10",
@@ -446,9 +446,9 @@
       ]
     },
     "node_modules/better-sqlite3": {
-      "version": "9.2.0",
-      "resolved": "https://registry.npmjs.org/better-sqlite3/-/better-sqlite3-9.2.0.tgz",
-      "integrity": "sha512-MEm49nfxCU6Yn5rTyXJhnTmjuom0YFrU76/7AC+7PMcftAwIVJ2VtBF6HSPRwQ/WWXw/sSbnPRPUSZ6vMXMniQ==",
+      "version": "9.2.2",
+      "resolved": "https://registry.npmjs.org/better-sqlite3/-/better-sqlite3-9.2.2.tgz",
+      "integrity": "sha512-qwjWB46il0lsDkeB4rSRI96HyDQr8sxeu1MkBVLMrwusq1KRu4Bpt1TMI+8zIJkDUtZ3umjAkaEjIlokZKWCQw==",
       "hasInstallScript": true,
       "dependencies": {
         "bindings": "^1.5.0",
@@ -4470,9 +4470,9 @@
       "integrity": "sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA=="
     },
     "better-sqlite3": {
-      "version": "9.2.0",
-      "resolved": "https://registry.npmjs.org/better-sqlite3/-/better-sqlite3-9.2.0.tgz",
-      "integrity": "sha512-MEm49nfxCU6Yn5rTyXJhnTmjuom0YFrU76/7AC+7PMcftAwIVJ2VtBF6HSPRwQ/WWXw/sSbnPRPUSZ6vMXMniQ==",
+      "version": "9.2.2",
+      "resolved": "https://registry.npmjs.org/better-sqlite3/-/better-sqlite3-9.2.2.tgz",
+      "integrity": "sha512-qwjWB46il0lsDkeB4rSRI96HyDQr8sxeu1MkBVLMrwusq1KRu4Bpt1TMI+8zIJkDUtZ3umjAkaEjIlokZKWCQw==",
       "requires": {
         "bindings": "^1.5.0",
         "prebuild-install": "^7.1.1"
