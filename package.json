@@ -46,7 +46,7 @@
   "dependencies": {
     "better-sqlite3": "9.4.5",
     "chalk": "5.3.0",
-    "optionator": "0.9.3",
+    "optionator": "0.9.4",
     "readline-sync": "1.4.10",
     "tozan": "7.0.1"
   },
