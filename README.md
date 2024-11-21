@@ -19,7 +19,7 @@ This tool compares images based on the following criteria:
 
 The idea is to start from stronger method, while progressing towards a weaker method.
 
-Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `18.12.0`, which is [the active Long Term Support (LTS) version](https://github.com/nodejs/Release#release-schedule).
+Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `22.11.0`, which is [the active Long Term Support (LTS) version](https://github.com/nodejs/Release#release-schedule).
 
 Underneath [SQLite](https://github.com/JoshuaWise/better-sqlite3) is used for storing any meta information about the files,
 as sometimes the amount of files to compare is huge.
