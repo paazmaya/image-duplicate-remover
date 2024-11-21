@@ -12,7 +12,7 @@
     "coverage": "c8 --all --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "engines": {
-    "node": ">=18.12.0"
+    "node": ">=22.11.0"
   },
   "files": [
     "bin",
