@@ -5,6 +5,8 @@ It follows the guidance from https://keepachangelog.com/en/1.0.0/.
 
 ## Unreleased
 
+- Minimum supported Node.js version lifted from `18.12.0` to `22.11.0`
+
 ## `v0.4.1` (2023-12-04)
 
 - No more testing at Travis CI, due to very limited usage availability
