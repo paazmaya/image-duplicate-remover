@@ -5,7 +5,9 @@
   "homepage": "https://github.com/paazmaya/image-duplicate-remover",
   "main": "index.js",
   "type": "module",
-  "bin": "bin/image-duplicate-remover.js",
+  "bin": {
+    "image-duplicate-remover": "bin/image-duplicate-remover.js"
+  },
   "scripts": {
     "lint": "eslint *.js bin lib",
     "test": "c8 --all --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
@@ -37,7 +39,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:paazmaya/image-duplicate-remover.git"
+    "url": "git+ssh://git@github.com/paazmaya/image-duplicate-remover.git"
   },
   "bugs": {
     "url": "https://github.com/paazmaya/image-duplicate-remover/issues"
