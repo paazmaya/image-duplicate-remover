@@ -9,8 +9,6 @@
  * Copyright (c) Juga Paazmaya <paazmaya@yahoo.com> (https://paazmaya.fi)
  * Licensed under the MIT license
  */
-
-
 import fs from 'node:fs';
 import path from 'node:path';
 
