@@ -103,7 +103,7 @@ npm install
 npm run lint
 ```
 
-Automated testing is done against [Ubuntu Trusty at Travis CI](https://app.travis-ci.com/paazmaya/image-duplicate-remover/)
+Automated testing is done against [Ubuntu at GitHub Actions](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml)
 and [Windows at AppVeyor](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover).
 
 Unit tests are written with [`tape`](https://github.com/substack/tape) and can be executed with `npm test`.
