@@ -11,7 +11,7 @@
   "scripts": {
     "lint": "eslint *.js bin lib",
     "test": "c8 --all --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
-    "coverage": "c8 --all --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
+    "coverage": "c8 --all --exclude tests report --reporter=text-lcov > coverage.lcov"
   },
   "engines": {
     "node": ">=22.11.0"
@@ -46,14 +46,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "better-sqlite3": "11.7.0",
     "chalk": "5.4.0",
     "optionator": "0.9.4",
     "readline-sync": "1.4.10",
-    "tozan": "7.0.1"
+    "tozan": "8.0.0"
   },
   "devDependencies": {
-    "codecov": "3.8.3",
     "eslint": "9.17.0",
     "eslint-config-paazmaya": "9.0.1",
     "eslint-plugin-n": "17.15.1",

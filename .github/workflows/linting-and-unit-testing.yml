@@ -20,8 +20,18 @@ jobs:
       with:
         node-version: '22.x'
 
-    - name: Do all npm stuff
+    - name: Install Node.js dependencies
+      run: npm ci
+
+    - name: Lint and test
       run: |
-        npm ci
         npm run lint
         npm test
+        npm run coverage
+
+    - name: Upload code coverage to codecov
+      # https://github.com/marketplace/actions/codecov
+      uses: codecov/codecov-action@v5
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: coverage.lcov
