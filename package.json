@@ -1,6 +1,6 @@
 {
   "name": "image-duplicate-remover",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Remove duplicate images from the two given directories recursively",
   "homepage": "https://github.com/paazmaya/image-duplicate-remover",
   "main": "index.js",
