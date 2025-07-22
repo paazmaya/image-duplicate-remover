@@ -3,7 +3,7 @@
 > Remove duplicate images from the two given directories recursively
 
 [![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/master?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/master)
-[![Node.js v22 CI](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml/badge.svg)](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml)
+[![Node.js CI](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml/badge.svg)](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/master/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=paazmaya_image-duplicate-remover&metric=code_smells)](https://sonarcloud.io/dashboard?id=paazmaya_image-duplicate-remover)
 
@@ -19,7 +19,7 @@ This tool compares images based on the following criteria:
 
 The idea is to start from stronger method, while progressing towards a weaker method.
 
-Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `22.11.0`, which is [the active Long Term Support (LTS) version](https://github.com/nodejs/Release#release-schedule).
+Please note that the minimum supported version of [Node.js](https://nodejs.org/en/) is `24.12.0`, which is [the active Long Term Support (LTS) version](https://github.com/nodejs/Release#release-schedule).
 
 Underneath [SQLite](https://github.com/JoshuaWise/better-sqlite3) is used for storing any meta information about the files,
 as sometimes the amount of files to compare is huge.
