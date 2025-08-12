@@ -46,7 +46,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "chalk": "5.4.1",
+    "chalk": "5.5.0",
     "optionator": "0.9.4",
     "readline-sync": "1.4.10",
     "tozan": "8.0.0"
