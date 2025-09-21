@@ -3,6 +3,10 @@
 This changelog covers the version history and possible upcoming changes.
 It follows the guidance from https://keepachangelog.com/en/1.0.0/.
 
+## Unreleased
+
+- Minimum supported Node.js version lifted from `22.11.0` to `24.12.0`
+
 ## `v0.5.0` (2024-12-21)
 
 - Minimum supported Node.js version lifted from `18.12.0` to `22.11.0`
