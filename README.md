@@ -10,12 +10,12 @@
 Too many images that are the same but might have different dates and other metadata.
 This tool compares images based on the following criteria:
 
-* [x] SHA-256 hash of the file, since `v0.1.0`
-* [x] File size in bytes, will be in `v0.2.0`
-* [ ] Width and height
-* [ ] Bit dept
-* [ ] Number of unique colors
-* [ ] Image contents comparison
+- [x] SHA-256 hash of the file, since `v0.1.0`
+- [x] File size in bytes, will be in `v0.2.0`
+- [ ] Width and height
+- [ ] Bit dept
+- [ ] Number of unique colors
+- [ ] Image contents comparison
 
 The idea is to start from stronger method, while progressing towards a weaker method.
 

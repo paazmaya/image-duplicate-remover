@@ -1,8 +1,11 @@
 # http://www.appveyor.com/docs/appveyor-yml
 
+image:
+  - Visual Studio 2022
+
 environment:
-  matrix:
-    - nodejs_version: "24"
+  NODE_SKIP_PLATFORM_CHECK: 1
+  nodejs_version: "24"
   IE_BIN: "%PROGRAMFILES%\\Internet Explorer\\iexplore.exe"
 
 version: "{build}-{branch}"
@@ -13,9 +16,6 @@ init:
   - set
 
 clone_depth: 1
-
-matrix:
-  fast_finish: true
 
 cache:
   - node_modules
