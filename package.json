@@ -55,6 +55,6 @@
     "eslint": "^5.10.0",
     "eslint-config-paazmaya": "^9.0.0",
     "nyc": "^13.2.0",
-    "tape": "^4.9.1"
+    "tape": "^5.9.0"
   }
 }
