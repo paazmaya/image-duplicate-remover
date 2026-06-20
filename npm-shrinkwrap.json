@@ -22,7 +22,7 @@
       "devDependencies": {
         "codecov": "^3.1.0",
         "eslint": "^5.10.0",
-        "eslint-config-paazmaya": "^5.1.0",
+        "eslint-config-paazmaya": "^9.0.0",
         "nyc": "^13.2.0",
         "tape": "^4.9.1"
       },
@@ -1051,13 +1051,32 @@
       }
     },
     "node_modules/eslint-config-paazmaya": {
-      "version": "5.3.0",
-      "resolved": "https://registry.npmjs.org/eslint-config-paazmaya/-/eslint-config-paazmaya-5.3.0.tgz",
-      "integrity": "sha512-ASagGpenfRR6cnhU6lroTBLvNNHtVASSPkRpVFdhle60fzluSao5XKOB6pcnnGRSD4Zg7hHqilGJCkgiVjpEpQ==",
+      "version": "9.0.1",
+      "resolved": "https://registry.npmjs.org/eslint-config-paazmaya/-/eslint-config-paazmaya-9.0.1.tgz",
+      "integrity": "sha512-QoR/CUZwCsOnPmKSlSLXerKsAqsmWzk8PvJmrmcSeWHeCrVUhfO6Wz/TUsrgBY0g3D0V6KmM7CdVfz/L8PLXvQ==",
       "dev": true,
       "license": "MIT",
+      "dependencies": {
+        "globals": "13.18.0"
+      },
       "engines": {
-        "node": ">=8.11.1"
+        "node": ">=18.12.0"
+      }
+    },
+    "node_modules/eslint-config-paazmaya/node_modules/globals": {
+      "version": "13.18.0",
+      "resolved": "https://registry.npmjs.org/globals/-/globals-13.18.0.tgz",
+      "integrity": "sha512-/mR4KI8Ps2spmoc0Ulu9L7agOF0du1CZNQ3dke8yItYlyKNmGrkONemBbd6V8UTc1Wgcqn21t3WYB7dbRmh6/A==",
+      "dev": true,
+      "license": "MIT",
+      "dependencies": {
+        "type-fest": "^0.20.2"
+      },
+      "engines": {
+        "node": ">=8"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
       }
     },
     "node_modules/eslint-scope": {
@@ -5046,6 +5065,19 @@
       },
       "engines": {
         "node": ">= 0.8.0"
+      }
+    },
+    "node_modules/type-fest": {
+      "version": "0.20.2",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-0.20.2.tgz",
+      "integrity": "sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==",
+      "dev": true,
+      "license": "(MIT OR CC0-1.0)",
+      "engines": {
+        "node": ">=10"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
       }
     },
     "node_modules/typed-array-buffer": {
