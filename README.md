@@ -31,8 +31,8 @@ Reading the information from image file is the most time consuming part within t
 
 Starting with version `0.3.0`, additional tools are needed.
 
-Make sure to have [GraphicsMagick](http://www.graphicsmagick.org/) (minimum version `1.3.18`) available in the `PATH`.
-It can be installed for example in Mac via [Brew](http://brew.sh):
+Make sure to have [GraphicsMagick](https://www.graphicsmagick.org/) (minimum version `1.3.18`) available in the `PATH`.
+It can be installed for example in Mac via [Brew](https://brew.sh):
 
 ```sh
 brew install graphicsmagick
@@ -44,7 +44,7 @@ In Ubuntu it is usually available via:
 sudo apt-get install graphicsmagick
 ```
 
-Windows users could [download an installer package](http://www.graphicsmagick.org/INSTALL-windows.html#installing-using-installer-package).
+Windows users could [download an installer package](https://www.graphicsmagick.org/INSTALL-windows.html#installing-using-installer-package).
 
 Now install the command line tool globally, which might need increased privileges:
 
@@ -91,11 +91,11 @@ image-duplicate-remover -vn a b
 
 First thing to do is to file [an issue](https://github.com/paazmaya/image-duplicate-remover/issues).
 
-["A Beginner's Guide to Open Source: The Best Advice for Making your First Contribution"](http://www.erikaheidi.com/blog/a-beginners-guide-to-open-source-the-best-advice-for-making-your-first-contribution/).
+["A Beginner's Guide to Open Source: The Best Advice for Making your First Contribution"](https://www.erikaheidi.com/blog/a-beginners-guide-to-open-source-the-best-advice-for-making-your-first-contribution/).
 
 [Also there is a blog post about "45 Github Issues Dos and Don’ts"](https://davidwalsh.name/45-github-issues-dos-donts).
 
-Linting is done with [ESLint](http://eslint.org) and can be executed with `npm run lint`.
+Linting is done with [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) and can be executed with `npm run lint`.
 There should be no errors appearing after any JavaScript file changes.
 
 ```sh

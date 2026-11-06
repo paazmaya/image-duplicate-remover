@@ -8,9 +8,9 @@
     "image-duplicate-remover": "bin/image-duplicate-remover.js"
   },
   "scripts": {
-    "lint": "eslint index.js bin lib",
-    "test": "nyc --all --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
-    "coverage": "nyc --all --exclude tests report --reporter=text-lcov > coverage.lcov && codecov"
+    "lint": "oxlint",
+    "test": "c8 --exclude tests tape tests/*_test.js tests/*/*_test.js && rm -rf tmp",
+    "coverage": "c8 --exclude tests report --reporter=text-lcov > coverage.lcov"
   },
   "engines": {
     "node": ">=24.12.0"
@@ -43,18 +43,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "better-sqlite3": "~5.4.0",
+    "better-sqlite3": "12.8.0",
     "chalk": "~2.4.1",
     "hasha": "~3.0.0",
     "image-extensions": "~1.1.0",
-    "optionator": "~0.9.0",
+    "optionator": "0.9.4",
     "readline-sync": "~1.4.9"
   },
   "devDependencies": {
-    "codecov": "^3.1.0",
-    "eslint": "^5.10.0",
-    "eslint-config-paazmaya": "^9.0.0",
-    "nyc": "^13.2.0",
-    "tape": "^5.9.0"
+    "c8": "12.0.0",
+    "oxlint": "1.91.0",
+    "tape": "5.10.3"
   }
 }
