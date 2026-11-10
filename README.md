@@ -2,7 +2,6 @@
 
 > Remove duplicate images from the two given directories recursively
 
-[![Windows build status](https://ci.appveyor.com/api/projects/status/gmjc0bi0bbydb667/branch/main?svg=true)](https://ci.appveyor.com/project/paazmaya/image-duplicate-remover/branch/main)
 [![Node.js CI](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml/badge.svg)](https://github.com/paazmaya/image-duplicate-remover/actions/workflows/linting-and-unit-testing.yml)
 [![codecov](https://codecov.io/gh/paazmaya/image-duplicate-remover/branch/main/graph/badge.svg)](https://codecov.io/gh/paazmaya/image-duplicate-remover)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=paazmaya_image-duplicate-remover&metric=code_smells)](https://sonarcloud.io/dashboard?id=paazmaya_image-duplicate-remover)
